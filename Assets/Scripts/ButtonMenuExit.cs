@@ -3,24 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonBenu : MonoBehaviour
+public class ButtonMenuExit : MonoBehaviour
 {
     private Button _button;
-
 
     private void Awake()
     {
         _button = GetComponent<Button>();
-    }
-
-
-    private void Start()
-    {
-    }
-
-
-    private void Update()
-    {       
     }
 
     private void OnEnable()
@@ -35,9 +24,6 @@ public class ButtonBenu : MonoBehaviour
 
     private void OnButtonClick()
     {
-        Debug.Log("BB");
+        Application.Quit();
     }
-
-
-
 }

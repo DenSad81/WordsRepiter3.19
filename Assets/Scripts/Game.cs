@@ -32,8 +32,8 @@ public class Game : MonoBehaviour
     private TMP_Text _textQuantity;
     private Button _buttonWord;
 
-    public Toggle _toggle;
-    public bool _isAutoMode;
+    private ToggleAutoModeChange _toggle;
+    public bool _isAutoMode = true;
 
     public event UnityAction EventDoResetColor;
     public event UnityAction EventDoPrint;
@@ -58,7 +58,7 @@ public class Game : MonoBehaviour
         _textWord = _fieldQuestion.GetComponent<TMP_Text>();
         _buttonWord = _fieldQuestion.GetComponent<Button>();
         _textQuantity = _fieldQuantity.GetComponent<TMP_Text>();
-        _toggle = _autoChange.GetComponentInChildren<Toggle>();
+        _toggle = _autoChange.GetComponent<ToggleAutoModeChange>();
     }
 
     private void Start()
@@ -156,9 +156,6 @@ public class Game : MonoBehaviour
         EventDoPrint?.Invoke();
 
         _textQuantity.text = _poolIDs.Count.ToString();
-
-        //   _ID.text = _wordID.ToString();
-        //   _rightAnswers.text = _poolRightAnswers[_wordID].ToString();
     }
 
     public void PrintingRightAnswers()
@@ -170,37 +167,7 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        _isAutoMode = _toggle.isOn;
-    }
-
-    private void OnEnable()
-    {
-        _toggle.onValueChanged.AddListener(OnChangeMode);
-    }
-
-    private void OnChangeMode(bool isOn)
-    {
-        _isAutoMode = isOn;
-
-        ColorBlock cb = _toggle.colors;
-
-        if (isOn)
-        {
-            cb.normalColor = Color.green;
-            cb.highlightedColor = Color.green;
-        }
-        else
-        {
-            cb.normalColor = Color.white;
-            cb.highlightedColor = Color.white;
-        }
-
-        _toggle.colors = cb;
-    }
-
-    private void OnDisable()
-    {
-        _toggle.onValueChanged.RemoveListener(OnChangeMode);
+        _isAutoMode = _toggle.IsAutoModeChange;
     }
 
 }
