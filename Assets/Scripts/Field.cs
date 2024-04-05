@@ -6,14 +6,16 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
-public class FieldAnswer : MonoBehaviour
+public class Field : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private int _fieldIndex;
+    [SerializeField] private bool _isQuestionField;
 
-    private Game _game;
-    public TMP_Text _text;
+    private MainProcces _game;
+    private TMP_Text _text;
     private Button _button;
     private Image _image;
     private Color _colorSemiRed;
@@ -22,7 +24,7 @@ public class FieldAnswer : MonoBehaviour
 
     private void Awake()
     {
-        _game = _gameObject.GetComponent<Game>();
+        _game = _gameObject.GetComponent<MainProcces>();
         _text = GetComponent<TMP_Text>();
         _button = GetComponent<Button>();
         _image = GetComponentInChildren<Image>();
@@ -31,7 +33,7 @@ public class FieldAnswer : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnButtonClick);
-        _game.EventDoResetColor+= DoResetColor;
+        _game.EventDoResetColor += DoResetColor;
         _game.EventDoPrint += DoPrint;
     }
 
@@ -44,19 +46,28 @@ public class FieldAnswer : MonoBehaviour
 
     private void OnButtonClick()
     {
-        if (_game._answersID[_fieldIndex] == _game._wordID)
+        if (_isQuestionField)
         {
-            _image.color = _colorSemiGreen;
-            _game.PrintingRightAnswers();
-            _game._poolRightAnswers[_game._wordID] -= 1;
-
-            if (_game._isAutoMode == true)
-                _game.GameBody();
+            if (_game._isAutoMode == false)
+                _game.ProccesBody();
         }
         else
         {
-            _game._poolRightAnswers[_game._wordID] += 1;
-            _image.color = _colorSemiRed;
+            if (_game._answersID[_fieldIndex] == _game._wordID)
+            {
+                _game.PrintingRightAnswers();
+
+                _image.color = _colorSemiGreen;
+                _game._poolRightAnswers[_game._wordID] -= 1;
+
+                if (_game._isAutoMode == true)
+                    _game.ProccesBody();
+            }
+            else
+            {
+                _image.color = _colorSemiRed;
+                _game._poolRightAnswers[_game._wordID] += 1;
+            }
         }
     }
 
@@ -67,7 +78,10 @@ public class FieldAnswer : MonoBehaviour
 
     public void DoPrint()
     {
-        _text.text = _game._answersWord[_fieldIndex];
+        if (_isQuestionField)
+            _text.text = _game._word;
+        else
+            _text.text = _game._answersWord[_fieldIndex];
     }
 
     void Start()

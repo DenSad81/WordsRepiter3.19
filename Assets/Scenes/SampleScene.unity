@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &107844023 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 177939093}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &177939093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -358,11 +353,6 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4227942736771490999, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
   m_PrefabInstance: {fileID: 1835132395}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &293561127 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5392570945392220675, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
-  m_PrefabInstance: {fileID: 4082434062459989347}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &293561128 stripped
 RectTransform:
@@ -657,17 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5b7d206a9183f44a34408f84b28be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fieldQuestion: {fileID: 293561127}
-  _fieldAnswerVar1: {fileID: 107844023}
-  _fieldAnswerVar2: {fileID: 1742773453}
-  _fieldAnswerVar3: {fileID: 885891071}
-  _fieldAnswerVar4: {fileID: 885891071}
-  _fieldAnswerVar5: {fileID: 1815719018}
-  _fieldAnswerVar6: {fileID: 719356656}
-  _fieldAnswerVar7: {fileID: 1158737430}
-  _fieldAnswerVar8: {fileID: 2052246282}
-  _autoChange: {fileID: 1965976941}
-  _fieldQuantity: {fileID: 1533053984}
+  _toggleModeChange: {fileID: 1965976944}
+  _textQuantity: {fileID: 1533053985}
   _ID: {fileID: 1251659103}
   _rightAnswers: {fileID: 2075140195}
   _isAutoMode: 0
@@ -780,11 +761,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577798230}
   m_CullTransparentMesh: 1
---- !u!1 &719356656 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 1727358175}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &743461865 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4227942736771490999, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
@@ -1059,11 +1035,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 849968494}
   m_CullTransparentMesh: 1
---- !u!1 &885891071 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 207263071}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &926246588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,11 +1388,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!1 &1158737430 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 763153671}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1171302676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,11 +2799,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741550925}
   m_CullTransparentMesh: 1
---- !u!1 &1742773453 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 1199924518}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1770911621
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,11 +2885,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
---- !u!1 &1815719018 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 1853258695}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1835132395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3512,7 +3468,7 @@ GameObject:
   - component: {fileID: 1965976943}
   - component: {fileID: 1965976944}
   m_Layer: 5
-  m_Name: ToggleAutoModeChange
+  m_Name: ToggleModeChange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3599,11 +3555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a4ddc6f367a0140937df7dcb64b6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2052246282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5945763152005905098, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
-  m_PrefabInstance: {fileID: 1835132395}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2072633484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3707,9 +3658,9 @@ RectTransform:
   - {fileID: 819637866}
   - {fileID: 264658846}
   - {fileID: 318325397}
-  - {fileID: 1533053987}
   - {fileID: 1251659102}
   - {fileID: 2075140194}
+  - {fileID: 1533053987}
   - {fileID: 1509956082}
   - {fileID: 926246589}
   m_Father: {fileID: 0}
@@ -3731,7 +3682,7 @@ GameObject:
   - component: {fileID: 2075140196}
   - component: {fileID: 2075140195}
   m_Layer: 5
-  m_Name: FieldRightAnswers
+  m_Name: FieldRightAnswer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4151,6 +4102,14 @@ PrefabInstance:
     - target: {fileID: 5392570945392220675, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: m_Name
       value: FieldQuestion
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
+      propertyPath: _gameObject
+      value: 
+      objectReference: {fileID: 561502119}
+    - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
+      propertyPath: _isQuestionField
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

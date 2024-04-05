@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleAutoModeChange : MonoBehaviour
+public class ToggleModeChange : MonoBehaviour
 {
     private Toggle _toggleMode;
     private bool _isAutoMode = true;

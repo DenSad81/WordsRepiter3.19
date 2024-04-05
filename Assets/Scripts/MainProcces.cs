@@ -10,29 +10,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Game : MonoBehaviour
+public class MainProcces : MonoBehaviour
 {
-    [SerializeField] private GameObject _fieldQuestion;
-    [SerializeField] private GameObject _fieldAnswerVar1;
-    [SerializeField] private GameObject _fieldAnswerVar2;
-    [SerializeField] private GameObject _fieldAnswerVar3;
-    [SerializeField] private GameObject _fieldAnswerVar4;
-    [SerializeField] private GameObject _fieldAnswerVar5;
-    [SerializeField] private GameObject _fieldAnswerVar6;
-    [SerializeField] private GameObject _fieldAnswerVar7;
-    [SerializeField] private GameObject _fieldAnswerVar8;
-
-    [SerializeField] private GameObject _autoChange;
-    [SerializeField] private GameObject _fieldQuantity;
-
+    [SerializeField] private ToggleModeChange _toggleModeChange;
+    [SerializeField] private TMP_Text _textQuantity;
     [SerializeField] private TMP_Text _ID;
     [SerializeField] private TMP_Text _rightAnswers;
 
-    private TMP_Text _textWord;
-    private TMP_Text _textQuantity;
-    private Button _buttonWord;
-
-    private ToggleAutoModeChange _toggle;
     public bool _isAutoMode = true;
 
     public event UnityAction EventDoResetColor;
@@ -53,21 +37,13 @@ public class Game : MonoBehaviour
     public int[] _answersID = new int[9];
     public string[] _answersWord = new string[9];
 
-    private void Awake()
-    {
-        _textWord = _fieldQuestion.GetComponent<TMP_Text>();
-        _buttonWord = _fieldQuestion.GetComponent<Button>();
-        _textQuantity = _fieldQuantity.GetComponent<TMP_Text>();
-        _toggle = _autoChange.GetComponent<ToggleAutoModeChange>();
-    }
-
     private void Start()
     {
         for (int i = 0; i < _wordsEn.Length; i++)
         {
             _poolIDs.Add(i);
             _poolIDsConst.Add(i);
-            _poolRightAnswers.Add(2);//количество верных ответов
+            _poolRightAnswers.Add(1);//количество верных ответов
         }
 
         FillingWord();
@@ -76,7 +52,7 @@ public class Game : MonoBehaviour
         Printing();
     }
 
-    public void GameBody()
+    public void ProccesBody()
     {
         if (_poolRightAnswers[_wordID] <= 0)
             _poolIDs.RemoveAt(_posWordInPoolIDs);
@@ -164,10 +140,18 @@ public class Game : MonoBehaviour
         _rightAnswers.text = _wordsRu[_wordID];
     }
 
-
     private void Update()
     {
-        _isAutoMode = _toggle.IsAutoModeChange;
+        _isAutoMode = _toggleModeChange.IsAutoModeChange;
     }
+
+
+
+
+
+
+
+
+
 
 }
