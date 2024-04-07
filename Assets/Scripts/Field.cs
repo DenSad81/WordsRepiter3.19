@@ -1,3 +1,4 @@
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,14 @@ using UnityEngine.Events;
 
 public class Field : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameObject;
+    [SerializeField] private MainProcces _mainProcess;
     [SerializeField] private int _fieldIndex;
     [SerializeField] private bool _isQuestionField;
+    [SerializeField] private bool _isAnswerField;
+    [SerializeField] private bool _isWordField;
+    [SerializeField] private bool _isRightAnswerField;
+    [SerializeField] private bool _isQuantityField;
 
-    private MainProcces _game;
     private TMP_Text _text;
     private Button _button;
     private Image _image;
@@ -22,75 +26,80 @@ public class Field : MonoBehaviour
     private Color _colorSemiGreen;
     private Color _colorTransend;
 
-    private void Awake()
-    {
-        _game = _gameObject.GetComponent<MainProcces>();
+    private void Awake() {
         _text = GetComponent<TMP_Text>();
         _button = GetComponent<Button>();
         _image = GetComponentInChildren<Image>();
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         _button.onClick.AddListener(OnButtonClick);
-        _game.EventDoResetColor += DoResetColor;
-        _game.EventDoPrint += DoPrint;
+        _mainProcess.EventDoResetColor += DoResetColor;
+        _mainProcess.EventDoPrint += DoPrint;
+        _mainProcess.EventDoPrintAddictionalField += DoPrintAddictionalField;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         _button.onClick.RemoveListener(OnButtonClick);
-        _game.EventDoResetColor -= DoResetColor;
-        _game.EventDoPrint -= DoPrint;
+        _mainProcess.EventDoResetColor -= DoResetColor;
+        _mainProcess.EventDoPrint -= DoPrint;
+        _mainProcess.EventDoPrintAddictionalField -= DoPrintAddictionalField;
     }
 
-    private void OnButtonClick()
-    {
+    private void OnButtonClick() {
         if (_isQuestionField)
         {
-            if (_game._isAutoMode == false)
-                _game.ProccesBody();
+            if (_mainProcess._isAutoMode == false)
+                _mainProcess.ProccesBody();
         }
-        else
+
+        if (_isAnswerField)
         {
-            if (_game._answersID[_fieldIndex] == _game._wordID)
+            if (_mainProcess._answersID[_fieldIndex] == _mainProcess.WordID)
             {
-                _game.PrintingRightAnswers();
-
+                _mainProcess.PrintAddictionalField();
                 _image.color = _colorSemiGreen;
-                _game._poolRightAnswers[_game._wordID] -= 1;
+                _mainProcess.SubtractToPoolRightAnswers();
 
-                if (_game._isAutoMode == true)
-                    _game.ProccesBody();
+                if (_mainProcess._isAutoMode)
+                    _mainProcess.ProccesBody();
             }
             else
             {
                 _image.color = _colorSemiRed;
-                _game._poolRightAnswers[_game._wordID] += 1;
+                _mainProcess.AddToPoolRightAnswers();
             }
         }
     }
 
-    public void DoResetColor()
-    {
+    public void DoResetColor() {
         _image.color = _colorTransend;
     }
 
-    public void DoPrint()
-    {
+    public void DoPrint() {
         if (_isQuestionField)
-            _text.text = _game._word;
-        else
-            _text.text = _game._answersWord[_fieldIndex];
+            _text.text = _mainProcess.Word;
+
+        if (_isAnswerField)
+            _text.text = _mainProcess._answersWord[_fieldIndex];
+
+        if (_isQuantityField)
+            _text.text = _mainProcess.VolumeOfPoolIDs.ToString();
     }
 
-    void Start()
-    {
+    public void DoPrintAddictionalField() {
+        if (_isRightAnswerField)
+            _text.text = _mainProcess.RightWord;
+
+        if (_isWordField)
+            _text.text = _mainProcess.Word;
+    }
+
+    void Start() {
         _colorSemiRed = Color.red;
         _colorSemiRed.a = 0.3f;
         _colorSemiGreen = Color.green;
         _colorSemiGreen.a = 0.3f;
         _colorTransend = new Color(0f, 0f, 0f, 0f);
     }
-
 }

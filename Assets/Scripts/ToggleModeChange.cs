@@ -1,27 +1,30 @@
+//using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ToggleModeChange : MonoBehaviour
 {
-    private Toggle _toggleMode;
-    private bool _isAutoMode = true;
+    [SerializeField] private MainProcces _mainProcess;
+    [SerializeField] private Toggle _toggle;
 
-    public bool IsAutoModeChange => _isAutoMode;
-
-    private void Start()
-    {
-        _toggleMode = GetComponent<Toggle>();
+    private void OnEnable() {
+        _toggle.onValueChanged.AddListener(OnToggleClick);
     }
 
-    private void Update()
-    {
-        _isAutoMode = _toggleMode.isOn;
+    private void OnDisable() {
+        _toggle.onValueChanged.RemoveListener(OnToggleClick);
     }
 
-
-
+    private void OnToggleClick(bool toggleState) {
+        _mainProcess._isAutoMode = toggleState;
+    }
 
 
 }
