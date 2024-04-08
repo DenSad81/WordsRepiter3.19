@@ -38,6 +38,7 @@ public class MainProcces : MonoBehaviour
     public event UnityAction EventDoPrintAddictionalField;
 
     private void Start() {
+
         for (int i = 0; i < _wordsEn.Length; i++)
         {
             _poolIDs.Add(i);
@@ -53,6 +54,7 @@ public class MainProcces : MonoBehaviour
     }
 
     public void ProccesBody() {
+
         if (_poolRightAnswers[_wordID] <= 0)
             _poolIDs.RemoveAt(_posWordInPoolIDs);
 
@@ -72,7 +74,6 @@ public class MainProcces : MonoBehaviour
     private void FillingAnswers() {
         _answersID[0] = _wordID;
         _answersWord[0] = _wordsRu[_wordID];
-
         List<int> poolIDsAnswerCopy = new List<int>(_poolIDsConst);
 
         poolIDsAnswerCopy.RemoveAt(_wordID);//при первом проходе _actWordID==_posActWordInPoolIDs
@@ -139,13 +140,42 @@ public class MainProcces : MonoBehaviour
         _poolRightAnswers[_wordID] -= 1;
     }
 
+    public int GetColor(int fieldIndex, bool isAnswerField) {
+        int codOfColor = -1;
 
+        if (isAnswerField)
+        {
+            if (_answersID[fieldIndex] == WordID)//угадали
+                codOfColor = 1; // semi green // _image.color = _colorSemiGreen;           
+            else
+                codOfColor = 2; // semi red // _image.color = _colorSemiRed;
+        }
+        return codOfColor;
+    }
 
+    public void StartNewProcces(int fieldIndex, bool isQuestionField, bool isAnswerField) {
 
+        if (isQuestionField)
+        {
+            if (_isAutoMode == false)
+                ProccesBody();
+        }
 
+        if (isAnswerField)
+        {
+            if (_answersID[fieldIndex] == WordID)//угадали
+            {
+                PrintAddictionalField();
+                SubtractToPoolRightAnswers();
 
-
-
-
+                if (_isAutoMode)
+                    ProccesBody();
+            }
+            else
+            {
+                AddToPoolRightAnswers();
+            }
+        }
+    }
 
 }

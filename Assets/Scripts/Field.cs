@@ -11,7 +11,7 @@ using UnityEngine.Events;
 
 public class Field : MonoBehaviour
 {
-    [SerializeField] private MainProcces _mainProcess;
+    [SerializeField] private MainProcces _mainProcces;
     [SerializeField] private int _fieldIndex;
     [SerializeField] private bool _isQuestionField;
     [SerializeField] private bool _isAnswerField;
@@ -34,42 +34,28 @@ public class Field : MonoBehaviour
 
     private void OnEnable() {
         _button.onClick.AddListener(OnButtonClick);
-        _mainProcess.EventDoResetColor += DoResetColor;
-        _mainProcess.EventDoPrint += DoPrint;
-        _mainProcess.EventDoPrintAddictionalField += DoPrintAddictionalField;
+        _mainProcces.EventDoResetColor += DoResetColor;
+        _mainProcces.EventDoPrint += DoPrint;
+        _mainProcces.EventDoPrintAddictionalField += DoPrintAddictionalField;
     }
 
     private void OnDisable() {
         _button.onClick.RemoveListener(OnButtonClick);
-        _mainProcess.EventDoResetColor -= DoResetColor;
-        _mainProcess.EventDoPrint -= DoPrint;
-        _mainProcess.EventDoPrintAddictionalField -= DoPrintAddictionalField;
+        _mainProcces.EventDoResetColor -= DoResetColor;
+        _mainProcces.EventDoPrint -= DoPrint;
+        _mainProcces.EventDoPrintAddictionalField -= DoPrintAddictionalField;
     }
 
     private void OnButtonClick() {
-        if (_isQuestionField)
-        {
-            if (_mainProcess._isAutoMode == false)
-                _mainProcess.ProccesBody();
-        }
+        int codOfColor = _mainProcces.GetColor(_fieldIndex, _isAnswerField);
 
-        if (_isAnswerField)
-        {
-            if (_mainProcess._answersID[_fieldIndex] == _mainProcess.WordID)
-            {
-                _mainProcess.PrintAddictionalField();
-                _image.color = _colorSemiGreen;
-                _mainProcess.SubtractToPoolRightAnswers();
+        if (codOfColor == 1)
+            _image.color = _colorSemiGreen;
 
-                if (_mainProcess._isAutoMode)
-                    _mainProcess.ProccesBody();
-            }
-            else
-            {
-                _image.color = _colorSemiRed;
-                _mainProcess.AddToPoolRightAnswers();
-            }
-        }
+        if (codOfColor == 2)
+            _image.color = _colorSemiRed;
+
+        _mainProcces.StartNewProcces(_fieldIndex, _isQuestionField, _isAnswerField);
     }
 
     public void DoResetColor() {
@@ -78,21 +64,21 @@ public class Field : MonoBehaviour
 
     public void DoPrint() {
         if (_isQuestionField)
-            _text.text = _mainProcess.Word;
+            _text.text = _mainProcces.Word;
 
         if (_isAnswerField)
-            _text.text = _mainProcess._answersWord[_fieldIndex];
+            _text.text = _mainProcces._answersWord[_fieldIndex];
 
         if (_isQuantityField)
-            _text.text = _mainProcess.VolumeOfPoolIDs.ToString();
+            _text.text = _mainProcces.VolumeOfPoolIDs.ToString();
     }
 
     public void DoPrintAddictionalField() {
         if (_isRightAnswerField)
-            _text.text = _mainProcess.RightWord;
+            _text.text = _mainProcces.RightWord;
 
         if (_isWordField)
-            _text.text = _mainProcess.Word;
+            _text.text = _mainProcces.Word;
     }
 
     void Start() {

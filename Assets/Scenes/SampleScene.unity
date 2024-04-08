@@ -148,6 +148,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502119}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
@@ -268,6 +272,10 @@ PrefabInstance:
       propertyPath: _gameObject
       value: 
       objectReference: {fileID: 561502119}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
@@ -645,7 +653,7 @@ GameObject:
   - component: {fileID: 561502121}
   - component: {fileID: 561502120}
   m_Layer: 0
-  m_Name: Game
+  m_Name: MainProcces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -787,6 +795,10 @@ PrefabInstance:
       propertyPath: _gameObject
       value: 
       objectReference: {fileID: 561502119}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
@@ -997,6 +1009,10 @@ PrefabInstance:
       propertyPath: _gameObject
       value: 
       objectReference: {fileID: 561502119}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
@@ -1636,6 +1652,10 @@ PrefabInstance:
       propertyPath: _gameObject
       value: 
       objectReference: {fileID: 561502119}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
@@ -2466,6 +2486,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502119}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
@@ -2803,6 +2827,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
@@ -2928,6 +2956,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502119}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
@@ -3048,6 +3080,10 @@ PrefabInstance:
       propertyPath: _gameObject
       value: 
       objectReference: {fileID: 561502119}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
@@ -3604,6 +3640,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502119}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
@@ -3934,6 +3974,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502119}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
@@ -4134,6 +4178,10 @@ PrefabInstance:
       propertyPath: _gameObject
       value: 
       objectReference: {fileID: 561502119}
+    - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
+      propertyPath: _mainProcces
+      value: 
+      objectReference: {fileID: 561502120}
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _mainProcess
       value: 
