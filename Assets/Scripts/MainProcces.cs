@@ -24,6 +24,7 @@ public class MainProcces : MonoBehaviour
     private string _word;
 
     public bool _isAutoMode = true;
+    public int _quantityRepit = 1;
 
     public int[] _answersID = new int[9];
     public string[] _answersWord = new string[9];
@@ -38,12 +39,19 @@ public class MainProcces : MonoBehaviour
     public event UnityAction EventDoPrintAddictionalField;
 
     private void Start() {
+        ReStart();
+    }
+
+    public void ReStart() {
+        _poolIDs.Clear();
+        _poolIDsConst.Clear();
+        _poolRightAnswers.Clear();
 
         for (int i = 0; i < _wordsEn.Length; i++)
         {
             _poolIDs.Add(i);
             _poolIDsConst.Add(i);
-            _poolRightAnswers.Add(1);//количество верных ответов
+            _poolRightAnswers.Add(_quantityRepit);//количество верных ответов
         }
 
         EventDoResetColor?.Invoke();
@@ -178,4 +186,5 @@ public class MainProcces : MonoBehaviour
         }
     }
 
+    
 }

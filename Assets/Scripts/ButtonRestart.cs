@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonMenuExit : MonoBehaviour
+public class ButtonRestart : MonoBehaviour
 {
+    [SerializeField] private MainProcces _mainProcces;
+
     private Button _button;
 
     private void Awake() {
@@ -20,6 +22,6 @@ public class ButtonMenuExit : MonoBehaviour
     }
 
     private void OnButtonClick() {
-        Application.Quit();
+        _mainProcces.ReStart();
     }
 }
