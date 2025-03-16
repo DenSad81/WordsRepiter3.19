@@ -14,15 +14,18 @@ public class ToggleModeChange : MonoBehaviour
     [SerializeField] private MainProcces _mainProcess;
     [SerializeField] private Toggle _toggle;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _toggle.onValueChanged.AddListener(OnToggleClick);
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         _toggle.onValueChanged.RemoveListener(OnToggleClick);
     }
 
-    private void OnToggleClick(bool toggleState) {
+    private void OnToggleClick(bool toggleState)
+    {
         _mainProcess._isAutoMode = toggleState;
     }
 

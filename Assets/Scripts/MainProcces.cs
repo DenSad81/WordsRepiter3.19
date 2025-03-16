@@ -38,11 +38,11 @@ public class MainProcces : MonoBehaviour
     public event UnityAction EventDoPrint;
     public event UnityAction EventDoPrintAddictionalField;
 
-    private void Start() {
-        ReStart();
-    }
+    private void Start()=>
+         ReStart();
 
-    public void ReStart() {
+    public void ReStart()
+    {
         _poolIDs.Clear();
         _poolIDsConst.Clear();
         _poolRightAnswers.Clear();
@@ -61,7 +61,8 @@ public class MainProcces : MonoBehaviour
         Print();
     }
 
-    public void ProccesBody() {
+    public void ProccesBody()
+    {
 
         if (_poolRightAnswers[_wordID] <= 0)
             _poolIDs.RemoveAt(_posWordInPoolIDs);
@@ -73,13 +74,15 @@ public class MainProcces : MonoBehaviour
         Print();
     }
 
-    private void FillingWord() {
+    private void FillingWord()
+    {
         _posWordInPoolIDs = Random.Range(0, _poolIDs.Count);
         _wordID = _poolIDs[_posWordInPoolIDs];
         _word = _wordsEn[_wordID];
     }
 
-    private void FillingAnswers() {
+    private void FillingAnswers()
+    {
         _answersID[0] = _wordID;
         _answersWord[0] = _wordsRu[_wordID];
         List<int> poolIDsAnswerCopy = new List<int>(_poolIDsConst);
@@ -125,30 +128,28 @@ public class MainProcces : MonoBehaviour
         _answersWord[8] = _wordsRu[_answersID[8]];
     }
 
-    private void RandomisationAnswers() {
+    private void RandomisationAnswers()
+    {
         int pos = Random.Range(1, _answersID.Length);
 
         _answersID[pos] = _answersID[0];
         _answersWord[pos] = _answersWord[0];
     }
 
-    private void Print() {
+    private void Print()=>
         EventDoPrint?.Invoke();
-    }
 
-    public void PrintAddictionalField() {
+    public void PrintAddictionalField()=>
         EventDoPrintAddictionalField?.Invoke();
-    }
 
-    public void AddToPoolRightAnswers() {
+    public void AddToPoolRightAnswers()=>
         _poolRightAnswers[_wordID] += 1;
-    }
 
-    public void SubtractToPoolRightAnswers() {
+    public void SubtractToPoolRightAnswers()=>
         _poolRightAnswers[_wordID] -= 1;
-    }
 
-    public int GetColor(int fieldIndex, bool isAnswerField) {
+    public int GetColor(int fieldIndex, bool isAnswerField)
+    {
         int codOfColor = -1;
 
         if (isAnswerField)
@@ -161,8 +162,8 @@ public class MainProcces : MonoBehaviour
         return codOfColor;
     }
 
-    public void StartNewProcces(int fieldIndex, bool isQuestionField, bool isAnswerField) {
-
+    public void StartNewProcces(int fieldIndex, bool isQuestionField, bool isAnswerField)
+    {
         if (isQuestionField)
         {
             if (_isAutoMode == false)
@@ -185,6 +186,4 @@ public class MainProcces : MonoBehaviour
             }
         }
     }
-
-    
 }
