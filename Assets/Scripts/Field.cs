@@ -18,6 +18,7 @@ public class Field : MonoBehaviour
     [SerializeField] private bool _isWordField;
     [SerializeField] private bool _isRightAnswerField;
     [SerializeField] private bool _isQuantityField;
+    [SerializeField] private WorkWithDB _workWithDB;
 
     private TMP_Text _text;
     private Button _button;
@@ -26,27 +27,31 @@ public class Field : MonoBehaviour
     private Color _colorSemiGreen;
     private Color _colorTransend;
 
-    private void Awake() {
+    private void Awake()
+    {
         _text = GetComponent<TMP_Text>();
         _button = GetComponent<Button>();
         _image = GetComponentInChildren<Image>();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         _button.onClick.AddListener(OnButtonClick);
         _mainProcces.EventDoResetColor += DoResetColor;
         _mainProcces.EventDoPrint += DoPrint;
         _mainProcces.EventDoPrintAddictionalField += DoPrintAddictionalField;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         _button.onClick.RemoveListener(OnButtonClick);
         _mainProcces.EventDoResetColor -= DoResetColor;
         _mainProcces.EventDoPrint -= DoPrint;
         _mainProcces.EventDoPrintAddictionalField -= DoPrintAddictionalField;
     }
 
-    private void OnButtonClick() {
+    private void OnButtonClick()
+    {
         int codOfColor = _mainProcces.GetColor(_fieldIndex, _isAnswerField);
 
         if (codOfColor == 1)
@@ -58,30 +63,34 @@ public class Field : MonoBehaviour
         _mainProcces.StartNewProcces(_fieldIndex, _isQuestionField, _isAnswerField);
     }
 
-    public void DoResetColor() {
+    public void DoResetColor()
+    {
         _image.color = _colorTransend;
     }
 
-    public void DoPrint() {
+    public void DoPrint()
+    {
         if (_isQuestionField)
-            _text.text = _mainProcces.Word;
+            _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;//_mainProcces.Word;
 
         if (_isAnswerField)
-            _text.text = _mainProcces._answersWord[_fieldIndex];
+            _text.text = _workWithDB.GetWordFromDB(_mainProcces._answersID[_fieldIndex]).WordRu;//_mainProcces._answersWord[_fieldIndex];
 
         if (_isQuantityField)
             _text.text = _mainProcces.VolumeOfPoolIDs.ToString();
     }
 
-    public void DoPrintAddictionalField() {
+    public void DoPrintAddictionalField()
+    {
         if (_isRightAnswerField)
-            _text.text = _mainProcces.RightWord;
+            _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;//_mainProcces.RightWord;
 
         if (_isWordField)
-            _text.text = _mainProcces.Word;
+            _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;//_mainProcces.Word;
     }
 
-    void Start() {
+    void Start()
+    {
         _colorSemiRed = Color.red;
         _colorSemiRed.a = 0.3f;
         _colorSemiGreen = Color.green;

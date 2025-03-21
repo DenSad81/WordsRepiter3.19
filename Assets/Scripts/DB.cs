@@ -34,7 +34,7 @@ public /*static*/ class DB
         return filePath;
 #endif
 #if UNITY_ANDROID
-         filePath = Path.Combine(Application.persistentDataPath, fileName);
+         filePath = Path.Combine(Application.persistentDataPath, _fileName);
         if (File.Exists(filePath)==false) 
             UnpackDatabase(filePath);
         return filePath;

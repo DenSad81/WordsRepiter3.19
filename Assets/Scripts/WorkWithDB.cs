@@ -15,21 +15,25 @@ public class WorkWithDB : MonoBehaviour
 
     private void Start()
     {
-        List<Word> words = GetAllWordsFromDB();
+        //List<Word> words = GetAllWordsFromDB();
 
-        //foreach (var word in words)
-        //    word.ShowData();
+        ////foreach (var word in words)
+        ////    word.ShowData();
 
-        Debug.Log("#######################");
+        //Debug.Log("#######################");
 
-        GetWordFromDB(1960).ShowData();
+        //GetWordFromDB(1960).ShowData();
 
+        //IncreaseCorrectAnswersInTableWords(1960);
 
-        IncreaseCorrectAnswersInTableWords(1960);
+        //GetWordFromDB(1960).ShowData();
 
-        GetWordFromDB(1960).ShowData();
+        //DeleteWordIntoDB(1971);
 
-        DeleteWordIntoDB(1971);
+        //SetCorrectAnswersInTableWords(1960,333);
+        //GetWordFromDB(1960).ShowData();
+        //SetAllCorrectAnswersInTableWords(3);
+        //GetWordFromDB(1960).ShowData();
 
     }
 
@@ -50,6 +54,16 @@ public class WorkWithDB : MonoBehaviour
             value--;
 
         db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers = {value} WHERE id={idWord};");
+    }
+
+    public void SetCorrectAnswersInTableWords(int idWord, int quantityCorrectAnswers=1)
+    {
+        db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers} WHERE id={idWord};");
+    }
+
+    public void SetAllCorrectAnswersInTableWords( int quantityCorrectAnswers = 1)
+    {
+        db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers};");
     }
 
     public List<Word> GetAllWordsFromDB()
