@@ -28,13 +28,20 @@ public class WorkWithDB : MonoBehaviour
 
         //GetWordFromDB(1960).ShowData();
 
-        //DeleteWordIntoDB(1971);
+        //DeleteWordIntoDB(1965);
+        //DeleteWordIntoDB(1968);
+        //DeleteWordIntoDB(1969);
+        //DeleteWordIntoDB(1970);
 
-        //SetCorrectAnswersInTableWords(1960,333);
+        //SetCorrectAnswersInTableWords(1960, 333);
         //GetWordFromDB(1960).ShowData();
-        //SetAllCorrectAnswersInTableWords(3);
+        //SetAllCorrectAnswersInTableWords(1);
         //GetWordFromDB(1960).ShowData();
 
+        //GetWordFromDB().ShowData();
+
+        //Debug.Log(GetWordFromDB(55555555));//null
+        //// Debug.Log(GetWordFromDB(null));
     }
 
     public void IncreaseCorrectAnswersInTableWords(int idWord)
@@ -48,6 +55,10 @@ public class WorkWithDB : MonoBehaviour
     public void DecreaseCorrectAnswersInTableWords(int idWord)
     {
         string temp = db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
+
+        if (temp == null)
+            return;
+
         int value = int.Parse(temp);
 
         if (value > 0)
@@ -56,12 +67,12 @@ public class WorkWithDB : MonoBehaviour
         db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers = {value} WHERE id={idWord};");
     }
 
-    public void SetCorrectAnswersInTableWords(int idWord, int quantityCorrectAnswers=1)
+    public void SetCorrectAnswersInTableWords(int idWord, int quantityCorrectAnswers = 1)
     {
         db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers} WHERE id={idWord};");
     }
 
-    public void SetAllCorrectAnswersInTableWords( int quantityCorrectAnswers = 1)
+    public void SetAllCorrectAnswersInTableWords(int quantityCorrectAnswers = 1)
     {
         db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers};");
     }
@@ -83,8 +94,12 @@ public class WorkWithDB : MonoBehaviour
         return words;
     }
 
-    public Word GetWordFromDB(int idWord = 0)
+    public Word GetWordFromDB(int idWord = 1)
     {
+        if (idWord < 1)
+            idWord = 1;
+
+
         DataTable table = db.ExecuteQueryWithAnswerAsDataTable($"SELECT* FROM Words WHERE id={idWord};");
         //table - содержит всего одну строку
         // Debug.Log(table.Rows.Count);
@@ -100,7 +115,7 @@ public class WorkWithDB : MonoBehaviour
                         int.Parse(table.Rows[0][5].ToString()));
     }
 
-    public void AddWordWithIdToDB(Word word)
+    public void AddWordWithIdToDB(Word word)//DANGER
     {
         if (db.ExecuteQueryWithAnswer($"SELECT id FROM Words WHERE id={word.Id};") != null)
             throw new InvalidOperationException("This index is bisy");
@@ -118,5 +133,4 @@ public class WorkWithDB : MonoBehaviour
     {
         db.ExecuteQueryWithoutAnswer($"DELETE FROM Words WHERE id={idWord};");
     }
-
 }

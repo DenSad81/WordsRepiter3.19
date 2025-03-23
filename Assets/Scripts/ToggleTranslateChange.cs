@@ -1,15 +1,10 @@
-//using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class ToggleModeChange : MonoBehaviour
+public class ToggleTranslateChange : MonoBehaviour
 {
     [SerializeField] private MainProcces _mainProcess;
     [SerializeField] private Toggle _toggle;
@@ -26,8 +21,6 @@ public class ToggleModeChange : MonoBehaviour
 
     private void OnToggleClick(bool toggleState)
     {
-        _mainProcess.IsAutoMode = toggleState;
+        _mainProcess.IsTranslateRevers = toggleState;
     }
-
-
 }

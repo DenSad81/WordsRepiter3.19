@@ -15,20 +15,17 @@ public class MainProcces : MonoBehaviour
 {
     [SerializeField] private WorkWithDB _workWithDB;
 
-    private List<int> _poolIDs = new List<int>();
-    private List<int> _poolIDsConst = new List<int>();//copy _poolIDs
+    private List<int> _poolIDsQuestions = new List<int>();
+    private List<int> _poolIDsAnswers = new List<int>();//copy _poolIDs
+    private Utils _utils = new Utils();
 
-    private List<int> _poolIDsCopy = new List<int>();
-    private int _posInPoolIDsCopy;
+    public bool IsAutoMode = true;
+    public bool IsTranslateRevers;//передача события идет через этот блок. нужно переделать, чтоб шло напрямую
+    public int QuantityRepit = 1;
+    public int[] AnswersID = new int[9];
 
-    private int _posInPoolIDs;
-
-    public bool _isAutoMode = true;
-    public int _quantityRepit = 1;
-    public int[] _answersID = new int[9];
-
-    public int VolumeOfPoolIDs => _poolIDs.Count;
-    public int WordIdInDB => _answersID[0];// _wordIdInDB;
+    public int VolumeOfPoolIDs => _poolIDsQuestions.Count;
+    public int WordIdInDB => AnswersID[0];// _wordIdInDB;
 
     public event UnityAction EventDoResetColor;
     public event UnityAction EventDoPrint;
@@ -36,131 +33,87 @@ public class MainProcces : MonoBehaviour
 
     private void Start()
     {
-        ReStart();
+        FillingQuestionsPool();
+        FillingAnswersPool();
+        ProccesBody();
+    }
+
+    private void FillingQuestionsPool(int limit = 13)//limit for adjust
+    {
+        _poolIDsQuestions.Clear();
+
+        int k = 1;
+
+        while (_workWithDB.GetWordFromDB(k) != null && k < limit)
+        {
+            if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
+                _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
+
+            k++;
+        }
+    }
+
+    private void FillingAnswersPool()
+    {
+        _poolIDsAnswers.Clear();
+
+        int k = 1;
+
+        while (_workWithDB.GetWordFromDB(k) != null)
+        {
+            _poolIDsAnswers.Add(_workWithDB.GetWordFromDB(k).Id);
+            k++;
+        }
     }
 
     public void ReStart()
     {
-        _poolIDs.Clear();
-        _poolIDsConst.Clear();
+        int k = 1;
 
-        for (int i = 1; i < 11; i++)
+        while (/*_workWithDB.GetWordFromDB(k) != null*/  k < 13)
         {
-            Word word = _workWithDB.GetWordFromDB(i);
-
-            _poolIDs.Add(word.Id);
-            _poolIDsConst.Add(word.Id);
-            _workWithDB.SetCorrectAnswersInTableWords(word.Id, _quantityRepit);// количество верных ответов
+            _workWithDB.SetCorrectAnswersInTableWords(_workWithDB.GetWordFromDB(k).Id, QuantityRepit);// количество верных ответов
+            k++;
         }
 
-        EventDoResetColor?.Invoke();
-        FillingWord();
-        FillingAnswers();
-        RandomisationAnswers();
-        Print();
+        FillingQuestionsPool();
+        FillingAnswersPool();
+        ProccesBody();
     }
 
     public void ProccesBody()
     {
-        if (_workWithDB.GetWordFromDB(_answersID[0]/*_wordIdInDB*/).CorrectAnswers <= 0)
-            _poolIDs.RemoveAt(_posInPoolIDs);
+        if (_workWithDB.GetWordFromDB(AnswersID[0]).CorrectAnswers <= 0)
+            _poolIDsQuestions.Remove(AnswersID[0]);
 
         EventDoResetColor?.Invoke();
-        FillingWord();
-        FillingAnswers();
-        RandomisationAnswers();
+        FillingFields();
+        RandomisationFields();
         Print();
     }
 
-    private void FillingWord()
+    private void FillingFields()
     {
-        _posInPoolIDs = Random.Range(0, _poolIDs.Count);
+        if (_poolIDsQuestions.Count < 1)
+            return;
 
-        _answersID[0] = _poolIDs[_posInPoolIDs];
-        DebugCollection(0, _posInPoolIDs, _answersID[0], _poolIDs);
+        AnswersID[0] = _poolIDsQuestions[Random.Range(0, _poolIDsQuestions.Count)];
+        _utils.GetUnicElementFromCollection(_poolIDsAnswers, false, AnswersID[0]);
+
+        AnswersID[1] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[2] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[3] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[4] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[5] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[6] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[7] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
+        AnswersID[8] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
     }
 
-    private void DebugCollection(int no, int pos, int id, List<int> collection)
+    private void RandomisationFields()
     {
-        string str = no + "   pos " + pos + "   id " + id + "  //  ";
-
-        foreach (var item in collection)
-            str = str + " " + item;
-
-        Debug.Log(str);
-    }
-
-    private int GetUnicElementFromCollection(List<int> collection, List<int> copyCollection, bool reset)
-    {
-        if (reset == true || copyCollection == null)
-        {
-            copyCollection.Clear();
-            copyCollection = new List<int>(collection);
-            return -1;
-        }
-
-        int result = copyCollection[Random.Range(0, copyCollection.Count)];
-        copyCollection.Remove(result);
-
-        return result;
-    }
-
-
-    private void FillingAnswers()
-    {
-        _poolIDsCopy = new List<int>(_poolIDsConst);
-        DebugCollection(1, -1, -1, _poolIDsCopy);
-
-        _poolIDsCopy.Remove(_answersID[0]);
-
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[1] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(1, _posInPoolIDsCopy, _answersID[1], _poolIDsCopy);
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[2] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(2, _posInPoolIDsCopy, _answersID[2], _poolIDsCopy);
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[3] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(3, _posInPoolIDsCopy, _answersID[3], _poolIDsCopy);
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[4] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(4, _posInPoolIDsCopy, _answersID[4], _poolIDsCopy);
-
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[5] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(5, _posInPoolIDsCopy, _answersID[5], _poolIDsCopy);
-
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[6] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(6, _posInPoolIDsCopy, _answersID[6], _poolIDsCopy);
-
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[7] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(7, _posInPoolIDsCopy, _answersID[7], _poolIDsCopy);
-
-
-        _poolIDsCopy.RemoveAt(_posInPoolIDsCopy);
-        _posInPoolIDsCopy = Random.Range(0, _poolIDsCopy.Count);
-        _answersID[8] = _poolIDsCopy[_posInPoolIDsCopy];
-        DebugCollection(8, _posInPoolIDsCopy, _answersID[8], _poolIDsCopy);
-    }
-
-    private void RandomisationAnswers()
-    {
-        int pos = Random.Range(1, _answersID.Length);
-        _answersID[pos] = _answersID[0];
+        int pos = Random.Range(1, AnswersID.Length);
+        AnswersID[pos] = AnswersID[0];
     }
 
     private void Print() =>
@@ -170,10 +123,10 @@ public class MainProcces : MonoBehaviour
         EventDoPrintAddictionalField?.Invoke();
 
     public void AddToPoolRightAnswers() =>
-       _workWithDB.IncreaseCorrectAnswersInTableWords(_answersID[0]);
+       _workWithDB.IncreaseCorrectAnswersInTableWords(AnswersID[0]);
 
     public void SubtractToPoolRightAnswers() =>
-        _workWithDB.DecreaseCorrectAnswersInTableWords(_answersID[0]);
+        _workWithDB.DecreaseCorrectAnswersInTableWords(AnswersID[0]);
 
     public int GetColor(int fieldIndex, bool isAnswerField)
     {
@@ -181,7 +134,7 @@ public class MainProcces : MonoBehaviour
 
         if (isAnswerField)
         {
-            if (_answersID[fieldIndex] == WordIdInDB)//угадали
+            if (AnswersID[fieldIndex] == WordIdInDB)//угадали
                 codOfColor = 1; // semi green // _image.color = _colorSemiGreen;           
             else
                 codOfColor = 2; // semi red // _image.color = _colorSemiRed;
@@ -194,18 +147,18 @@ public class MainProcces : MonoBehaviour
     {
         if (isQuestionField)
         {
-            if (_isAutoMode == false)
+            if (IsAutoMode == false)
                 ProccesBody();
         }
 
         if (isAnswerField)
         {
-            if (_answersID[fieldIndex] == WordIdInDB)//угадали
+            if (AnswersID[fieldIndex] == WordIdInDB)//угадали
             {
                 PrintAddictionalField();
                 SubtractToPoolRightAnswers();
 
-                if (_isAutoMode)
+                if (IsAutoMode)
                     ProccesBody();
             }
             else

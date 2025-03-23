@@ -25,6 +25,6 @@ public class InputFieldQuantityRepit : MonoBehaviour
 
         if (int.Parse(str) < 1 || int.Parse(str) > 11)
             return;
-        _mainProcces._quantityRepit = int.Parse(str);
+        _mainProcces.QuantityRepit = int.Parse(str);
     }
 }
