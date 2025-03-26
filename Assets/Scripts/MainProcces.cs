@@ -1,15 +1,15 @@
 //using System;
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Threading;
-using TMPro;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
+//using System.Linq;
+//using System.Security.Principal;
+//using System.Threading;
+//using TMPro;
+//using Unity.Collections.LowLevel.Unsafe;
+//using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 public class MainProcces : MonoBehaviour
 {
@@ -38,13 +38,13 @@ public class MainProcces : MonoBehaviour
         ProccesBody();
     }
 
-    private void FillingQuestionsPool(int limit = 13)//limit for adjust
+    private void FillingQuestionsPool()//limit for adjust
     {
         _poolIDsQuestions.Clear();
 
         int k = 1;
 
-        while (_workWithDB.GetWordFromDB(k) != null && k < limit)
+        while (_workWithDB.GetWordFromDB(k) != null)
         {
             if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
                 _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
@@ -68,13 +68,15 @@ public class MainProcces : MonoBehaviour
 
     public void ReStart()
     {
-        int k = 1;
+        //int k = 1;
 
-        while (/*_workWithDB.GetWordFromDB(k) != null*/  k < 13)
-        {
-            _workWithDB.SetCorrectAnswersInTableWords(_workWithDB.GetWordFromDB(k).Id, QuantityRepit);// количество верных ответов
-            k++;
-        }
+        //while (_workWithDB.GetWordFromDB(k) != null)
+        //{
+        //    _workWithDB.SetCorrectAnswersInTableWords(_workWithDB.GetWordFromDB(k).Id, QuantityRepit);// количество верных ответов
+        //    k++;
+        //}
+
+        _workWithDB.SetAllCorrectAnswersInTableWords(QuantityRepit);
 
         FillingQuestionsPool();
         FillingAnswersPool();
