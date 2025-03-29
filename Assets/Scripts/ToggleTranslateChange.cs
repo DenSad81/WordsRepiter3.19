@@ -2,12 +2,12 @@
 //using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Events;
-using UnityEngine.UI;
+//using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class ToggleTranslateChange : MonoBehaviour
 {
-    [SerializeField] private MainProcces _mainProcess;
-    [SerializeField] private Toggle _toggle;
+    [SerializeField] private UnityEngine.UI.Toggle _toggle;
 
     private void OnEnable()
     {
@@ -21,6 +21,11 @@ public class ToggleTranslateChange : MonoBehaviour
 
     private void OnToggleClick(bool toggleState)
     {
-        _mainProcess.IsTranslateRevers = toggleState;
+        SettingHolder.IsTranslateRevers = toggleState;
+    }
+
+    private void Start()
+    {
+        _toggle.isOn = SettingHolder.IsTranslateRevers;
     }
 }

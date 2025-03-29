@@ -71,13 +71,13 @@ public class Field : MonoBehaviour
     public void DoPrint()
     {
         if (_isQuestionField)
-            if (_mainProcces.IsTranslateRevers == false)
+            if (SettingHolder.IsTranslateRevers == false)
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;
             else
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;
 
         if (_isAnswerField)
-            if (_mainProcces.IsTranslateRevers == false)
+            if (SettingHolder.IsTranslateRevers == false)
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.AnswersID[_fieldIndex]).WordRu;
             else
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.AnswersID[_fieldIndex]).WordEn;
@@ -89,13 +89,13 @@ public class Field : MonoBehaviour
     public void DoPrintAddictionalField()
     {
         if (_isRightAnswerField)
-            if (_mainProcces.IsTranslateRevers == false)
+            if (SettingHolder.IsTranslateRevers == false)
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;
             else
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;
 
         if (_isWordField)
-            if (_mainProcces.IsTranslateRevers == false)
+            if (SettingHolder.IsTranslateRevers == false)
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;
             else
                 _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;

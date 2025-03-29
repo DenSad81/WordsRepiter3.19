@@ -6,13 +6,12 @@
 //using TMPro;
 //using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 //using UnityEngine.Events;
 
 public class ToggleModeChange : MonoBehaviour
 {
-    [SerializeField] private MainProcces _mainProcess;
-    [SerializeField] private Toggle _toggle;
+    [SerializeField] private UnityEngine.UI.Toggle _toggle;
 
     private void OnEnable()
     {
@@ -26,8 +25,11 @@ public class ToggleModeChange : MonoBehaviour
 
     private void OnToggleClick(bool toggleState)
     {
-        _mainProcess.IsAutoMode = toggleState;
+        SettingHolder.IsAutoMode = toggleState;
     }
 
-
+    private void Start()
+    {
+        _toggle.isOn = SettingHolder.IsAutoMode;
+    }
 }

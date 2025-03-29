@@ -42,6 +42,8 @@ public class WorkWithDB : MonoBehaviour
 
         //Debug.Log(GetWordFromDB(55555555));//null
         //// Debug.Log(GetWordFromDB(null));
+
+        //AddWordWithoutIdToDB(new Word(1999,"rrr","ttt","fff",1,4));
     }
 
     public void IncreaseCorrectAnswersInTableWords(int idWord)

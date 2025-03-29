@@ -1,12 +1,11 @@
 //using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonRestart : MonoBehaviour
+public class ButtonGoWordsScene : MonoBehaviour
 {
-    // [SerializeField] private MainProcces _mainProcces;
-    [SerializeField] private WorkWithDB _workWithDB;
     private Button _button;
 
     private void Awake() =>
@@ -19,5 +18,5 @@ public class ButtonRestart : MonoBehaviour
         _button.onClick.RemoveListener(OnButtonClick);
 
     private void OnButtonClick() =>
-        _workWithDB.SetAllCorrectAnswersInTableWords(SettingHolder.QuantityRepit);
+        SceneManager.LoadScene("WordsScene");
 }

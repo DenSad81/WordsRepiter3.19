@@ -10,18 +10,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 //using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainProcces : MonoBehaviour
 {
     [SerializeField] private WorkWithDB _workWithDB;
+    // private WorkWithDB _workWithDB = new WorkWithDB();
 
     private List<int> _poolIDsQuestions = new List<int>();
     private List<int> _poolIDsAnswers = new List<int>();//copy _poolIDs
     private Utils _utils = new Utils();
 
-    public bool IsAutoMode = true;
-    public bool IsTranslateRevers;//передача события идет через этот блок. нужно переделать, чтоб шло напрямую
-    public int QuantityRepit = 1;
+    //public bool IsAutoMode = true;
+    //public bool IsTranslateRevers;//передача события идет через этот блок. нужно переделать, чтоб шло напрямую
+    //public int QuantityRepit = 1;
     public int[] AnswersID = new int[9];
 
     public int VolumeOfPoolIDs => _poolIDsQuestions.Count;
@@ -35,10 +37,11 @@ public class MainProcces : MonoBehaviour
     {
         FillingQuestionsPool();
         FillingAnswersPool();
+
         ProccesBody();
     }
 
-    private void FillingQuestionsPool()//limit for adjust
+    private void FillingQuestionsPool()
     {
         _poolIDsQuestions.Clear();
 
@@ -66,22 +69,14 @@ public class MainProcces : MonoBehaviour
         }
     }
 
-    public void ReStart()
-    {
-        //int k = 1;
+    //public void ReStart()
+    //{
+    //    _workWithDB.SetAllCorrectAnswersInTableWords(SettingHolder.QuantityRepit);
 
-        //while (_workWithDB.GetWordFromDB(k) != null)
-        //{
-        //    _workWithDB.SetCorrectAnswersInTableWords(_workWithDB.GetWordFromDB(k).Id, QuantityRepit);// количество верных ответов
-        //    k++;
-        //}
-
-        _workWithDB.SetAllCorrectAnswersInTableWords(QuantityRepit);
-
-        FillingQuestionsPool();
-        FillingAnswersPool();
-        ProccesBody();
-    }
+    //    FillingQuestionsPool();
+    //    FillingAnswersPool();
+    //    ProccesBody();
+    //}
 
     public void ProccesBody()
     {
@@ -149,7 +144,7 @@ public class MainProcces : MonoBehaviour
     {
         if (isQuestionField)
         {
-            if (IsAutoMode == false)
+            if (SettingHolder.IsAutoMode == false)
                 ProccesBody();
         }
 
@@ -160,7 +155,7 @@ public class MainProcces : MonoBehaviour
                 PrintAddictionalField();
                 SubtractToPoolRightAnswers();
 
-                if (IsAutoMode)
+                if (SettingHolder.IsAutoMode)
                     ProccesBody();
             }
             else

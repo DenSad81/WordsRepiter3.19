@@ -1,11 +1,12 @@
 //using System.Collections;
 //using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonMenuOn : MonoBehaviour
+public class ButtonGoMainScene : MonoBehaviour
 {
-    [SerializeField] PanelMenu _menu;
+    //[SerializeField] PanelMenu _menu;
     private Button _button;
 
     private void Awake()
@@ -25,7 +26,8 @@ public class ButtonMenuOn : MonoBehaviour
 
     private void OnButtonClick()
     {
-        _menu.OpenPanel();
+        SceneManager.LoadScene("MainScene");
+        //_menu.OpenPanel();
     }
 
 
