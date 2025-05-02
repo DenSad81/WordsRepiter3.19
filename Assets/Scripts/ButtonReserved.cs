@@ -3,9 +3,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonMenuOff : MonoBehaviour
+public class ButtonReserved : MonoBehaviour
 {
-    [SerializeField] PanelMenu _menu;
     private Button _button;
 
     private void Awake()
@@ -25,6 +24,6 @@ public class ButtonMenuOff : MonoBehaviour
 
     private void OnButtonClick()
     {
-        _menu.ClosePanel();
+       Debug.Log("Button resevwd is pushed");
     }
 }

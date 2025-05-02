@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ButtonMenuExit : MonoBehaviour
+public class ButtonExit : MonoBehaviour
 {
     private Button _button;
 
@@ -25,7 +25,6 @@ public class ButtonMenuExit : MonoBehaviour
 
     private void OnButtonClick()
     {
-        //SceneManager.LoadScene("NewScene");
         Application.Quit();
     }
 }

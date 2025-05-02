@@ -8,6 +8,7 @@ using UnityEngine;
 public class ToggleTranslateChange : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Toggle _toggle;
+    [SerializeField] private WorkWithDB _workWithDB;
 
     private void OnEnable()
     {
@@ -21,11 +22,13 @@ public class ToggleTranslateChange : MonoBehaviour
 
     private void OnToggleClick(bool toggleState)
     {
-        SettingHolder.IsTranslateRevers = toggleState;
+        // SettingHolder.IsTranslateRevers = toggleState;
+        _workWithDB.SetDirectionEnRuInTableUsers(toggleState);
     }
 
     private void Start()
     {
-        _toggle.isOn = SettingHolder.IsTranslateRevers;
+        // _toggle.isOn = SettingHolder.IsTranslateRevers;
+        _toggle.isOn = _workWithDB.ChekIfDirectionEnRuFromTableUsers();
     }
 }

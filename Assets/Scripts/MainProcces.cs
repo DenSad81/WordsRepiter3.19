@@ -10,20 +10,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 //using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class MainProcces : MonoBehaviour
 {
     [SerializeField] private WorkWithDB _workWithDB;
-    // private WorkWithDB _workWithDB = new WorkWithDB();
 
     private List<int> _poolIDsQuestions = new List<int>();
-    private List<int> _poolIDsAnswers = new List<int>();//copy _poolIDs
+    private List<int> _poolIDsAnswers = new List<int>();
     private Utils _utils = new Utils();
 
-    //public bool IsAutoMode = true;
-    //public bool IsTranslateRevers;//передача события идет через этот блок. нужно переделать, чтоб шло напрямую
-    //public int QuantityRepit = 1;
     public int[] AnswersID = new int[9];
 
     public int VolumeOfPoolIDs => _poolIDsQuestions.Count;
@@ -35,39 +31,76 @@ public class MainProcces : MonoBehaviour
 
     private void Start()
     {
-        FillingQuestionsPool();
-        FillingAnswersPool();
-
+        FillingPools();
         ProccesBody();
     }
 
-    private void FillingQuestionsPool()
+    private void FillingPools()
     {
         _poolIDsQuestions.Clear();
-
-        int k = 1;
-
-        while (_workWithDB.GetWordFromDB(k) != null)
-        {
-            if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
-                _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
-
-            k++;
-        }
-    }
-
-    private void FillingAnswersPool()
-    {
         _poolIDsAnswers.Clear();
 
         int k = 1;
 
-        while (_workWithDB.GetWordFromDB(k) != null)
+        while (true)
         {
-            _poolIDsAnswers.Add(_workWithDB.GetWordFromDB(k).Id);
+            Word tempWord = _workWithDB.GetWordFromDB(k);
+
+            if (tempWord == null)
+                return;
+
+            if (tempWord.CorrectAnswers != 0)
+                _poolIDsQuestions.Add(tempWord.Id);
+
+            _poolIDsAnswers.Add(tempWord.Id);
             k++;
         }
     }
+
+    //private void FillingPools3()
+    //{
+    //    _poolIDsQuestions.Clear();
+    //    _poolIDsAnswers.Clear();
+
+    //    int k = 1;
+
+    //    while (_workWithDB.GetWordFromDB(k) != null)
+    //    {
+    //        if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
+    //            _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
+
+    //        _poolIDsAnswers.Add(_workWithDB.GetWordFromDB(k).Id);
+    //        k++;
+    //    }
+    //}
+
+    //private void FillingQuestionsPool()
+    //{
+    //    _poolIDsQuestions.Clear();
+
+    //    int k = 1;
+
+    //    while (_workWithDB.GetWordFromDB(k) != null)
+    //    {
+    //        if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
+    //            _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
+
+    //        k++;
+    //    }
+    //}
+
+    //private void FillingAnswersPool()
+    //{
+    //    _poolIDsAnswers.Clear();
+
+    //    int k = 1;
+
+    //    while (_workWithDB.GetWordFromDB(k) != null)
+    //    {
+    //        _poolIDsAnswers.Add(_workWithDB.GetWordFromDB(k).Id);
+    //        k++;
+    //    }
+    //}
 
     //public void ReStart()
     //{
@@ -78,7 +111,7 @@ public class MainProcces : MonoBehaviour
     //    ProccesBody();
     //}
 
-    public void ProccesBody()
+    private void ProccesBody()
     {
         if (_workWithDB.GetWordFromDB(AnswersID[0]).CorrectAnswers <= 0)
             _poolIDsQuestions.Remove(AnswersID[0]);
@@ -144,7 +177,7 @@ public class MainProcces : MonoBehaviour
     {
         if (isQuestionField)
         {
-            if (SettingHolder.IsAutoMode == false)
+            if (_workWithDB.ChekIfModeAutoFromTableUsers() == false)
                 ProccesBody();
         }
 
@@ -155,7 +188,7 @@ public class MainProcces : MonoBehaviour
                 PrintAddictionalField();
                 SubtractToPoolRightAnswers();
 
-                if (SettingHolder.IsAutoMode)
+                if (_workWithDB.ChekIfModeAutoFromTableUsers())
                     ProccesBody();
             }
             else

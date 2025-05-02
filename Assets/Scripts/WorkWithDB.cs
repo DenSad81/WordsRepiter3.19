@@ -11,7 +11,8 @@ using UnityEngine;
 
 public class WorkWithDB : MonoBehaviour
 {
-    private DB db = new DB("mainDB.bytes");
+    private DB _db = new DB("mainDB.bytes");
+    private string _users = "Users";
 
     private void Start()
     {
@@ -44,19 +45,103 @@ public class WorkWithDB : MonoBehaviour
         //// Debug.Log(GetWordFromDB(null));
 
         //AddWordWithoutIdToDB(new Word(1999,"rrr","ttt","fff",1,4));
+
+
+
+        //SetModeAutoInTableUsers(true);
+        //Debug.Log(ChekIfModeAutoFromTableUsers());
+
+        //SetModeAutoInTableUsers(false);
+        //Debug.Log(ChekIfModeAutoFromTableUsers());
+
+
+
+        //SetDirectionEnRuInTableUsers(true);
+        //Debug.Log(ChekIfDirectionEnRuFromTableUsers());
+
+
+        //SetDirectionEnRuInTableUsers(false);
+        //Debug.Log(ChekIfDirectionEnRuFromTableUsers());
+
+      
+        //Debug.Log(GetQuantityRepitFromTableUsers());
+        //SetQuantityRepitInTableUsers(3);
+        //Debug.Log(GetQuantityRepitFromTableUsers());
+        //SetQuantityRepitFromTableUsers(33);
+        //Debug.Log(GetQuantityRepitFromTableUsers());
+        //SetQuantityRepitFromTableUsers();
+        //Debug.Log(GetQuantityRepitFromTableUsers());
     }
+
+    public bool ChekIfModeAutoFromTableUsers(int id = 1)
+    {
+        string temp = _db.ExecuteQueryWithAnswer($"SELECT modeChange FROM Users WHERE id={id};");
+
+        if (temp == "Auto")
+            return true;
+        else
+            return false;
+    }
+
+    public void SetModeAutoInTableUsers(bool isAutoModeChange = true, int id = 1)
+    {
+        string tt;
+
+        if (isAutoModeChange == true)
+            tt = "Auto";
+        else
+            tt = "Manual";
+
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET modeChange ='{tt}' WHERE id={id};");
+    }
+
+    public bool ChekIfDirectionEnRuFromTableUsers(int id = 1)
+    {
+        string temp = _db.ExecuteQueryWithAnswer($"SELECT direction FROM Users WHERE id={id};");
+
+        if (temp == "EnRu")
+            return true;
+        else
+            return false;
+    }
+
+    public void SetDirectionEnRuInTableUsers(bool directionEnRu = true, int id = 1)
+    {
+        string tt;
+
+        if (directionEnRu == true)
+            tt = "EnRu";
+        else
+            tt = "RuEn";
+
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET direction ='{tt}' WHERE id={id};");
+    }
+
+    public int GetQuantityRepitFromTableUsers(int id = 1)
+    {
+        string temp = _db.ExecuteQueryWithAnswer($"SELECT quantityRepit FROM Users WHERE id={id};");
+        return int.Parse(temp);
+    }
+
+    public void SetQuantityRepitInTableUsers(int quantityRepit=1,int id = 1)
+    {
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET quantityRepit ={quantityRepit} WHERE id={id};");
+    }
+
+
+
 
     public void IncreaseCorrectAnswersInTableWords(int idWord)
     {
-        string temp = db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
+        string temp = _db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
         int t = int.Parse(temp);
         t++;
-        db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={t} WHERE id={idWord};");
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={t} WHERE id={idWord};");
     }
 
     public void DecreaseCorrectAnswersInTableWords(int idWord)
     {
-        string temp = db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
+        string temp = _db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
 
         if (temp == null)
             return;
@@ -66,22 +151,22 @@ public class WorkWithDB : MonoBehaviour
         if (value > 0)
             value--;
 
-        db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers = {value} WHERE id={idWord};");
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers = {value} WHERE id={idWord};");
     }
 
     public void SetCorrectAnswersInTableWords(int idWord, int quantityCorrectAnswers = 1)
     {
-        db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers} WHERE id={idWord};");
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers} WHERE id={idWord};");
     }
 
     public void SetAllCorrectAnswersInTableWords(int quantityCorrectAnswers = 1)
     {
-        db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers};");
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers};");
     }
 
     public List<Word> GetAllWordsFromDB()
     {
-        DataTable table = db.ExecuteQueryWithAnswerAsDataTable("SELECT* FROM Words;");
+        DataTable table = _db.ExecuteQueryWithAnswerAsDataTable("SELECT* FROM Words;");
         // Debug.Log(table.Rows.Count);
         // Debug.Log(table.Columns.Count);
         List<Word> words = new List<Word>();
@@ -102,7 +187,7 @@ public class WorkWithDB : MonoBehaviour
             idWord = 1;
 
 
-        DataTable table = db.ExecuteQueryWithAnswerAsDataTable($"SELECT* FROM Words WHERE id={idWord};");
+        DataTable table = _db.ExecuteQueryWithAnswerAsDataTable($"SELECT* FROM Words WHERE id={idWord};");
         //table - содержит всего одну строку
         // Debug.Log(table.Rows.Count);
         // Debug.Log(table.Columns.Count);
@@ -119,20 +204,20 @@ public class WorkWithDB : MonoBehaviour
 
     public void AddWordWithIdToDB(Word word)//DANGER
     {
-        if (db.ExecuteQueryWithAnswer($"SELECT id FROM Words WHERE id={word.Id};") != null)
+        if (_db.ExecuteQueryWithAnswer($"SELECT id FROM Words WHERE id={word.Id};") != null)
             throw new InvalidOperationException("This index is bisy");
 
-        db.ExecuteQueryWithoutAnswer($"INSERT INTO Words VALUES({word.Id}, '{word.WordEn}', '{word.Transcryption}', '{word.WordRu}', {word.Dict_id}, {word.CorrectAnswers});");
+        _db.ExecuteQueryWithoutAnswer($"INSERT INTO Words VALUES({word.Id}, '{word.WordEn}', '{word.Transcryption}', '{word.WordRu}', {word.Dict_id}, {word.CorrectAnswers});");
     }
 
     public void AddWordWithoutIdToDB(Word word)
     {
-        db.ExecuteQueryWithoutAnswer($"INSERT INTO Words (wordEn, transcryption, wordRu, dict_id, correctAnswers)" +
+        _db.ExecuteQueryWithoutAnswer($"INSERT INTO Words (wordEn, transcryption, wordRu, dict_id, correctAnswers)" +
                    $"VALUES('{word.WordEn}', '{word.Transcryption}', '{word.WordRu}', {word.Dict_id}, {word.CorrectAnswers});");
     }
 
     public void DeleteWordIntoDB(int idWord)
     {
-        db.ExecuteQueryWithoutAnswer($"DELETE FROM Words WHERE id={idWord};");
+        _db.ExecuteQueryWithoutAnswer($"DELETE FROM Words WHERE id={idWord};");
     }
 }

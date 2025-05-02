@@ -934,6 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggle: {fileID: 597907160}
+  _workWithDB: {fileID: 1555379944}
 --- !u!114 &597907160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159e43238320a0f48a0a6ec5a84cc020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _workWithDB: {fileID: 1555379944}
 --- !u!114 &658673860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,7 +1471,7 @@ GameObject:
   - component: {fileID: 804733762}
   - component: {fileID: 804733761}
   m_Layer: 5
-  m_Name: ButtonMenuOff
+  m_Name: ButtonReserved
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1507,7 +1509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 777d90243265338419a70ba5208f090b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menu: {fileID: 1712581800}
 --- !u!114 &804733762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1805,6 +1806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _toggle: {fileID: 1126664275}
+  _workWithDB: {fileID: 1555379944}
 --- !u!114 &1126664275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3225,7 +3227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44687c618aefaa146a5335b5e0340433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menu: {fileID: 1712581800}
 --- !u!1 &2069883134
 GameObject:
   m_ObjectHideFlags: 0

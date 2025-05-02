@@ -22,17 +22,20 @@ public /*static*/ class DB
     private /*static*/ string GetDatabasePath()
     {
         string filePath;
+
 #if UNITY_EDITOR
         filePath = Path.Combine(Application.streamingAssetsPath, _fileName);
       // filePath = Path.Combine("C:/_projects/DB", fileName);
         return filePath;
 #endif
+
 #if UNITY_STANDALONE
         filePath = Path.Combine(Application.dataPath, _fileName);
         if (File.Exists(filePath) == false)
             UnpackDatabase(filePath);
         return filePath;
 #endif
+
 #if UNITY_ANDROID
          filePath = Path.Combine(Application.persistentDataPath, _fileName);
         if (File.Exists(filePath)==false) 

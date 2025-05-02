@@ -19,5 +19,5 @@ public class ButtonRestart : MonoBehaviour
         _button.onClick.RemoveListener(OnButtonClick);
 
     private void OnButtonClick() =>
-        _workWithDB.SetAllCorrectAnswersInTableWords(SettingHolder.QuantityRepit);
+        _workWithDB.SetAllCorrectAnswersInTableWords(/*SettingHolder.QuantityRepit*/_workWithDB.GetQuantityRepitFromTableUsers());
 }

@@ -12,6 +12,7 @@ using UnityEngine;
 public class ToggleModeChange : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Toggle _toggle;
+    [SerializeField] private WorkWithDB _workWithDB;
 
     private void OnEnable()
     {
@@ -25,11 +26,13 @@ public class ToggleModeChange : MonoBehaviour
 
     private void OnToggleClick(bool toggleState)
     {
-        SettingHolder.IsAutoMode = toggleState;
+       // SettingHolder.IsAutoMode = toggleState;
+        _workWithDB.SetModeAutoInTableUsers(toggleState);
     }
 
     private void Start()
     {
-        _toggle.isOn = SettingHolder.IsAutoMode;
+        //_toggle.isOn = SettingHolder.IsAutoMode;
+        _toggle.isOn = _workWithDB.ChekIfModeAutoFromTableUsers();
     }
 }
