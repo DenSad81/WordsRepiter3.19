@@ -134,11 +134,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 1
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -154,11 +154,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -267,11 +267,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 3
@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -287,11 +287,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -579,52 +579,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4227942736771490999, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
   m_PrefabInstance: {fileID: 1853258695}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &561502119
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 561502121}
-  - component: {fileID: 561502120}
-  m_Layer: 0
-  m_Name: MainProcces
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &561502120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561502119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe5b7d206a9183f44a34408f84b28be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _workWithDB: {fileID: 1240508969}
-  AnswersID: 000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!4 &561502121
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561502119}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &654415629 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4227942736771490999, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
@@ -641,7 +595,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -649,11 +603,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -775,11 +729,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 6
@@ -787,7 +741,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -795,11 +749,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -928,11 +882,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 2
@@ -940,7 +894,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -948,11 +902,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -1239,11 +1193,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 5
@@ -1251,7 +1205,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -1259,11 +1213,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -1376,7 +1330,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -1388,11 +1342,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -1505,11 +1459,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 7
@@ -1517,7 +1471,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -1525,11 +1479,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -1638,11 +1592,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 4
@@ -1650,7 +1604,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -1658,11 +1612,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -1905,7 +1859,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -1913,11 +1867,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -2148,11 +2102,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _GO
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _game
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _fieldIndex
       value: 8
@@ -2160,7 +2114,7 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -2168,11 +2122,11 @@ PrefabInstance:
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -2282,6 +2236,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2072633488}
     m_Modifications:
+    - target: {fileID: 3253326533209813566, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
+      propertyPath: m_fontSize
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3253326533209813566, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 3409772385853475735, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2365,7 +2327,7 @@ PrefabInstance:
     - target: {fileID: 5015802828088142213, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 5392570945392220675, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: m_Name
       value: FieldQuestion
@@ -2373,7 +2335,7 @@ PrefabInstance:
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _gameObject
       value: 
-      objectReference: {fileID: 561502119}
+      objectReference: {fileID: 0}
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _workWithDB
       value: 
@@ -2381,11 +2343,11 @@ PrefabInstance:
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _mainProcces
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _mainProcess
       value: 
-      objectReference: {fileID: 561502120}
+      objectReference: {fileID: 0}
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _eventsManager
       value: 
@@ -2406,5 +2368,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 2072633488}
   - {fileID: 302765460}
-  - {fileID: 561502121}
   - {fileID: 1240508968}

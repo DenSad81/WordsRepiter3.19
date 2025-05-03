@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class Field : MonoBehaviour
 {
-    [SerializeField] private MainProcces _mainProcces;
+    //[SerializeField] private MainProcces _mainProcces;
     [SerializeField] private int _fieldIndex;
     [SerializeField] private bool _isQuestionField;
     [SerializeField] private bool _isAnswerField;
@@ -38,68 +38,29 @@ public class Field : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnButtonClick);
-        EventsManager.EventDoResetColor += DoResetColor;
-        EventsManager.EventDoPrint += DoPrint;
-        EventsManager.EventDoPrintAddictionalField += DoPrintAddictionalField;
+
+        if (_isAnswerField)
+            EventsManager.EventDoResetColor += DoResetColor;
+
+        if (_isQuestionField || _isAnswerField || _isQuantityField)
+            EventsManager.EventDoPrint += DoPrintMainFields;
+
+        if (_isRightAnswerField || _isWordField)
+            EventsManager.EventDoPrintAddictionalField += DoPrintAddictionalFields;
     }
 
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnButtonClick);
-        EventsManager.EventDoResetColor -= DoResetColor;
-        EventsManager.EventDoPrint -= DoPrint;
-        EventsManager.EventDoPrintAddictionalField -= DoPrintAddictionalField;
-    }
-
-    private void OnButtonClick()
-    {
-        int codOfColor = _mainProcces.GetColor(_fieldIndex, _isAnswerField);
-
-        if (codOfColor == 1)
-            _image.color = _colorSemiGreen;
-
-        if (codOfColor == 2)
-            _image.color = _colorSemiRed;
-
-        _mainProcces.StartNewProcces(_fieldIndex, _isQuestionField, _isAnswerField);
-    }
-
-    public void DoResetColor()
-    {
-        _image.color = _colorTransend;
-    }
-
-    public void DoPrint()
-    {
-        if (_isQuestionField)
-            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;
-            else
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;
 
         if (_isAnswerField)
-            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.AnswersID[_fieldIndex]).WordRu;
-            else
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.AnswersID[_fieldIndex]).WordEn;
+            EventsManager.EventDoResetColor -= DoResetColor;
 
-        if (_isQuantityField)
-            _text.text = _mainProcces.VolumeOfPoolIDs.ToString();
-    }
+        if (_isQuestionField || _isAnswerField || _isQuantityField)
+            EventsManager.EventDoPrint -= DoPrintMainFields;
 
-    public void DoPrintAddictionalField()
-    {
-        if (_isRightAnswerField)
-            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;
-            else
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;
-
-        if (_isWordField)
-            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordEn;
-            else
-                _text.text = _workWithDB.GetWordFromDB(_mainProcces.WordIdInDB).WordRu;
+        if (_isRightAnswerField || _isWordField)
+            EventsManager.EventDoPrintAddictionalField -= DoPrintAddictionalFields;
     }
 
     void Start()
@@ -109,5 +70,80 @@ public class Field : MonoBehaviour
         _colorSemiGreen = Color.green;
         _colorSemiGreen.a = 0.3f;
         _colorTransend = new Color(0f, 0f, 0f, 0f);
+    }
+
+    private void OnButtonClick()
+    {
+        Debug.Log("rgtg");
+
+        if (_isAnswerField)//мен€ем цвет пол€ 
+        {
+            if (MainProcces.ChekIfAnswerIsRight(_fieldIndex))//угадали
+                _image.color = _colorSemiGreen;
+            else
+                _image.color = _colorSemiRed;
+        }
+
+
+
+        if (_isQuestionField)//запуск нового цикла
+        {
+            if (_workWithDB.ChekIfModeAutoFromTableUsers() == false)//нужно упростить чтоб посто€нно в DB не лезть
+                MainProcces.ProccesBody();
+        }
+        else if (_isAnswerField)
+        {
+            if (MainProcces.ChekIfAnswerIsRight(_fieldIndex))//угадали
+            {
+                EventsManager.EventDoPrintAddictionalField?.Invoke();
+
+                //DoPrintAddictionalFields();
+
+                _workWithDB.DecreaseCorrectAnswersInTableWords(MainProcces.AnswersID[0]);
+
+                if (_workWithDB.ChekIfModeAutoFromTableUsers())
+                    MainProcces.ProccesBody();
+            }
+            else
+            {
+                _workWithDB.IncreaseCorrectAnswersInTableWords(MainProcces.AnswersID[0]);
+            }
+        }
+    }
+
+    public void DoResetColor() =>
+        _image.color = _colorTransend;
+
+    public void DoPrintMainFields()
+    {
+        if (_isQuestionField)
+            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordEn;
+            else
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordRu;
+
+        if (_isAnswerField)
+            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.AnswersID[_fieldIndex]).WordRu;
+            else
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.AnswersID[_fieldIndex]).WordEn;
+
+        if (_isQuantityField)
+            _text.text = MainProcces.VolumeOfPoolIDs.ToString();
+    }
+
+    public void DoPrintAddictionalFields()
+    {
+        if (_isRightAnswerField)
+            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordRu;
+            else
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordEn;
+
+        if (_isWordField)
+            if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordEn;
+            else
+                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordRu;
     }
 }

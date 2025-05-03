@@ -14,26 +14,27 @@ using UnityEngine.Events;
 //using UnityEngine.UI;
 //using UnityEngine.SceneManagement;
 
-public class MainProcces : MonoBehaviour
+public static class MainProcces /*: MonoBehaviour*/
 {
-    [SerializeField] private WorkWithDB _workWithDB;
+    private static WorkWithDB _workWithDB;
+    private static Utils _utils = new Utils();
 
-    private List<int> _poolIDsQuestions = new List<int>();
-    private List<int> _poolIDsAnswers = new List<int>();
-    private Utils _utils = new Utils();
+    private static List<int> _poolIDsQuestions = new List<int>();
+    private static List<int> _poolIDsAnswers = new List<int>();   
+    public static int[] AnswersID = new int[9];
 
-    public int[] AnswersID = new int[9];
+    public static int VolumeOfPoolIDs => _poolIDsQuestions.Count;
+    public static int WordIdInDB => AnswersID[0];// _wordIdInDB;
 
-    public int VolumeOfPoolIDs => _poolIDsQuestions.Count;
-    public int WordIdInDB => AnswersID[0];// _wordIdInDB;
-
-    private void Start()
+    public static void FirstScan(object obj)
     {
+        _workWithDB = (WorkWithDB)obj;
+
         FillingPools();
         ProccesBody();
     }
 
-    private void FillingPools()
+    private static void FillingPools()
     {
         _poolIDsQuestions.Clear();
         _poolIDsAnswers.Clear();
@@ -55,7 +56,7 @@ public class MainProcces : MonoBehaviour
         }
     }
 
-    private void ProccesBody()
+    public static void ProccesBody()
     {
         if (_workWithDB.GetWordFromDB(AnswersID[0]).CorrectAnswers <= 0)
             _poolIDsQuestions.Remove(AnswersID[0]);
@@ -66,7 +67,7 @@ public class MainProcces : MonoBehaviour
         EventsManager.EventDoPrint?.Invoke();
     }
 
-    private void FillingFields()
+    private static void FillingFields()
     {
         if (_poolIDsQuestions.Count < 1)
             return;
@@ -84,49 +85,12 @@ public class MainProcces : MonoBehaviour
         AnswersID[8] = _utils.GetUnicElementFromCollection(_poolIDsAnswers);
     }
 
-    private void RandomisationFields()
+    private static void RandomisationFields()
     {
         int pos = Random.Range(1, AnswersID.Length);
         AnswersID[pos] = AnswersID[0];
     }
 
-    public int GetColor(int fieldIndex, bool isAnswerField)
-    {
-        int codOfColor = -1;
-
-        if (isAnswerField)
-        {
-            if (AnswersID[fieldIndex] == WordIdInDB)//угадали
-                codOfColor = 1; // semi green // _image.color = _colorSemiGreen;           
-            else
-                codOfColor = 2; // semi red // _image.color = _colorSemiRed;
-        }
-
-        return codOfColor;
-    }
-
-    public void StartNewProcces(int fieldIndex, bool isQuestionField, bool isAnswerField)
-    {
-        if (isQuestionField)
-        {
-            if (_workWithDB.ChekIfModeAutoFromTableUsers() == false)//нужно упростить чтоб постоянно в DB не лезть
-                ProccesBody();
-        }
-
-        if (isAnswerField)
-        {
-            if (AnswersID[fieldIndex] == WordIdInDB)//угадали
-            {
-                EventsManager.EventDoPrintAddictionalField?.Invoke();
-                _workWithDB.DecreaseCorrectAnswersInTableWords(AnswersID[0]);
-
-                if (_workWithDB.ChekIfModeAutoFromTableUsers())
-                    ProccesBody();
-            }
-            else
-            {
-                _workWithDB.IncreaseCorrectAnswersInTableWords(AnswersID[0]);
-            }
-        }
-    }
+    public static bool ChekIfAnswerIsRight(int fieldIndex) =>
+         (AnswersID[fieldIndex] == WordIdInDB);//угадали;
 }

@@ -28,13 +28,12 @@ public class InputFieldQuantityRepit : MonoBehaviour
     {
         if (int.Parse(str) < 1 || int.Parse(str) > 11)
             return;
-        /*SettingHolder.QuantityRepit = int.Parse(str);*/
+
         _workWithDB.SetQuantityRepitInTableUsers(int.Parse(str));
     }
 
     private void Start()
     {
-        //_inputField.text = SettingHolder.QuantityRepit.ToString();
         _inputField.text = _workWithDB.GetQuantityRepitFromTableUsers().ToString();
     }
 }

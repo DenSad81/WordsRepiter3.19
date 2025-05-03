@@ -6,6 +6,7 @@ using System.Data;
 //using UnityEditor.Search;
 //using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using static UnityEngine.UIElements.UxmlAttributeDescription;
 //using UnityEngine.Assertions;
 
@@ -63,7 +64,7 @@ public class WorkWithDB : MonoBehaviour
         //SetDirectionEnRuInTableUsers(false);
         //Debug.Log(ChekIfDirectionEnRuFromTableUsers());
 
-      
+
         //Debug.Log(GetQuantityRepitFromTableUsers());
         //SetQuantityRepitInTableUsers(3);
         //Debug.Log(GetQuantityRepitFromTableUsers());
@@ -71,7 +72,14 @@ public class WorkWithDB : MonoBehaviour
         //Debug.Log(GetQuantityRepitFromTableUsers());
         //SetQuantityRepitFromTableUsers();
         //Debug.Log(GetQuantityRepitFromTableUsers());
+
+        //доделать-запуск только на сцене слов!!!
+
+
+        if (SceneManager.GetActiveScene().name == "WordsScene")
+            MainProcces.FirstScan(this);
     }
+
 
     public bool ChekIfModeAutoFromTableUsers(int id = 1)
     {
@@ -123,7 +131,7 @@ public class WorkWithDB : MonoBehaviour
         return int.Parse(temp);
     }
 
-    public void SetQuantityRepitInTableUsers(int quantityRepit=1,int id = 1)
+    public void SetQuantityRepitInTableUsers(int quantityRepit = 1, int id = 1)
     {
         _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET quantityRepit ={quantityRepit} WHERE id={id};");
     }
