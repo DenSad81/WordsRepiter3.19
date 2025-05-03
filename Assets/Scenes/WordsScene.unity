@@ -160,6 +160,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
       objectReference: {fileID: 0}
@@ -288,6 +292,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
@@ -601,7 +609,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _workWithDB: {fileID: 1240508969}
-  QuantityRepit: 1
   AnswersID: 000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &561502121
 Transform:
@@ -647,6 +654,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isRightAnswerField
       value: 1
@@ -789,6 +800,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
@@ -938,6 +953,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
@@ -1246,6 +1265,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
       objectReference: {fileID: 0}
@@ -1370,6 +1393,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4227942736771490999, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1504,6 +1531,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
       objectReference: {fileID: 0}
@@ -1632,6 +1663,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
@@ -1884,6 +1919,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isQuantityField
       value: 1
       objectReference: {fileID: 0}
@@ -2135,6 +2174,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 561502120}
     - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 17170431594730888, guid: ebdf8876b54393a4dbfba4eb365d5845, type: 3}
       propertyPath: _isAnswerField
       value: 1
       objectReference: {fileID: 0}
@@ -2343,6 +2386,10 @@ PrefabInstance:
       propertyPath: _mainProcess
       value: 
       objectReference: {fileID: 561502120}
+    - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
+      propertyPath: _eventsManager
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8252843957075538528, guid: 244cc126f0c9e094c92bc5421aa8968f, type: 3}
       propertyPath: _isQuestionField
       value: 1

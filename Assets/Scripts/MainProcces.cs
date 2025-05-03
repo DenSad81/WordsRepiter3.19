@@ -1,6 +1,8 @@
 //using System;
 //using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+
 //using System.Linq;
 //using System.Security.Principal;
 //using System.Threading;
@@ -24,10 +26,6 @@ public class MainProcces : MonoBehaviour
 
     public int VolumeOfPoolIDs => _poolIDsQuestions.Count;
     public int WordIdInDB => AnswersID[0];// _wordIdInDB;
-
-    public event UnityAction EventDoResetColor;
-    public event UnityAction EventDoPrint;
-    public event UnityAction EventDoPrintAddictionalField;
 
     private void Start()
     {
@@ -57,69 +55,15 @@ public class MainProcces : MonoBehaviour
         }
     }
 
-    //private void FillingPools3()
-    //{
-    //    _poolIDsQuestions.Clear();
-    //    _poolIDsAnswers.Clear();
-
-    //    int k = 1;
-
-    //    while (_workWithDB.GetWordFromDB(k) != null)
-    //    {
-    //        if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
-    //            _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
-
-    //        _poolIDsAnswers.Add(_workWithDB.GetWordFromDB(k).Id);
-    //        k++;
-    //    }
-    //}
-
-    //private void FillingQuestionsPool()
-    //{
-    //    _poolIDsQuestions.Clear();
-
-    //    int k = 1;
-
-    //    while (_workWithDB.GetWordFromDB(k) != null)
-    //    {
-    //        if (_workWithDB.GetWordFromDB(k).CorrectAnswers != 0)
-    //            _poolIDsQuestions.Add(_workWithDB.GetWordFromDB(k).Id);
-
-    //        k++;
-    //    }
-    //}
-
-    //private void FillingAnswersPool()
-    //{
-    //    _poolIDsAnswers.Clear();
-
-    //    int k = 1;
-
-    //    while (_workWithDB.GetWordFromDB(k) != null)
-    //    {
-    //        _poolIDsAnswers.Add(_workWithDB.GetWordFromDB(k).Id);
-    //        k++;
-    //    }
-    //}
-
-    //public void ReStart()
-    //{
-    //    _workWithDB.SetAllCorrectAnswersInTableWords(SettingHolder.QuantityRepit);
-
-    //    FillingQuestionsPool();
-    //    FillingAnswersPool();
-    //    ProccesBody();
-    //}
-
     private void ProccesBody()
     {
         if (_workWithDB.GetWordFromDB(AnswersID[0]).CorrectAnswers <= 0)
             _poolIDsQuestions.Remove(AnswersID[0]);
 
-        EventDoResetColor?.Invoke();
+        EventsManager.EventDoResetColor?.Invoke();
         FillingFields();
         RandomisationFields();
-        Print();
+        EventsManager.EventDoPrint?.Invoke();
     }
 
     private void FillingFields()
@@ -146,18 +90,6 @@ public class MainProcces : MonoBehaviour
         AnswersID[pos] = AnswersID[0];
     }
 
-    private void Print() =>
-        EventDoPrint?.Invoke();
-
-    public void PrintAddictionalField() =>
-        EventDoPrintAddictionalField?.Invoke();
-
-    public void AddToPoolRightAnswers() =>
-       _workWithDB.IncreaseCorrectAnswersInTableWords(AnswersID[0]);
-
-    public void SubtractToPoolRightAnswers() =>
-        _workWithDB.DecreaseCorrectAnswersInTableWords(AnswersID[0]);
-
     public int GetColor(int fieldIndex, bool isAnswerField)
     {
         int codOfColor = -1;
@@ -177,7 +109,7 @@ public class MainProcces : MonoBehaviour
     {
         if (isQuestionField)
         {
-            if (_workWithDB.ChekIfModeAutoFromTableUsers() == false)
+            if (_workWithDB.ChekIfModeAutoFromTableUsers() == false)//нужно упростить чтоб посто€нно в DB не лезть
                 ProccesBody();
         }
 
@@ -185,15 +117,15 @@ public class MainProcces : MonoBehaviour
         {
             if (AnswersID[fieldIndex] == WordIdInDB)//угадали
             {
-                PrintAddictionalField();
-                SubtractToPoolRightAnswers();
+                EventsManager.EventDoPrintAddictionalField?.Invoke();
+                _workWithDB.DecreaseCorrectAnswersInTableWords(AnswersID[0]);
 
                 if (_workWithDB.ChekIfModeAutoFromTableUsers())
                     ProccesBody();
             }
             else
             {
-                AddToPoolRightAnswers();
+                _workWithDB.IncreaseCorrectAnswersInTableWords(AnswersID[0]);
             }
         }
     }

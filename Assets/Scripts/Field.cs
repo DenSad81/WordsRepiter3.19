@@ -19,6 +19,7 @@ public class Field : MonoBehaviour
     [SerializeField] private bool _isRightAnswerField;
     [SerializeField] private bool _isQuantityField;
     [SerializeField] private WorkWithDB _workWithDB;
+    //[SerializeField] private EventsManager _eventsManager;
 
     private TMP_Text _text;
     private Button _button;
@@ -37,17 +38,17 @@ public class Field : MonoBehaviour
     private void OnEnable()
     {
         _button.onClick.AddListener(OnButtonClick);
-        _mainProcces.EventDoResetColor += DoResetColor;
-        _mainProcces.EventDoPrint += DoPrint;
-        _mainProcces.EventDoPrintAddictionalField += DoPrintAddictionalField;
+        EventsManager.EventDoResetColor += DoResetColor;
+        EventsManager.EventDoPrint += DoPrint;
+        EventsManager.EventDoPrintAddictionalField += DoPrintAddictionalField;
     }
 
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnButtonClick);
-        _mainProcces.EventDoResetColor -= DoResetColor;
-        _mainProcces.EventDoPrint -= DoPrint;
-        _mainProcces.EventDoPrintAddictionalField -= DoPrintAddictionalField;
+        EventsManager.EventDoResetColor -= DoResetColor;
+        EventsManager.EventDoPrint -= DoPrint;
+        EventsManager.EventDoPrintAddictionalField -= DoPrintAddictionalField;
     }
 
     private void OnButtonClick()
