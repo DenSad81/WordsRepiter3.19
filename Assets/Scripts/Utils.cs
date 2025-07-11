@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Utils
+public class Utils : MonoBehaviour
 {
     private List<int> _collectionMemory = new List<int>();
 
-    public int GetUnicElementFromCollection(List<int> collection, bool reset = false, int whisoutElement = -1)
+    public int GetUnicElementFromCollection(List<int> collection, bool reset = false, int removableElement = -1)
     {
-        if (reset == true || _collectionMemory == null || whisoutElement != -1)
+        if (reset == true || _collectionMemory == null || removableElement != -1)
         {
             _collectionMemory.Clear();
             _collectionMemory = new List<int>(collection);
 
-            if (whisoutElement != -1)
-                _collectionMemory.Remove(whisoutElement);
+            if (removableElement != -1)
+                _collectionMemory.Remove(removableElement);
 
             return -1;
         }
@@ -34,5 +34,4 @@ public class Utils
 
         Debug.Log(str);
     }
-
 }

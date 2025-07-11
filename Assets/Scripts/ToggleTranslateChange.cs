@@ -8,27 +8,22 @@ using UnityEngine;
 public class ToggleTranslateChange : MonoBehaviour
 {
     [SerializeField] private UnityEngine.UI.Toggle _toggle;
-    [SerializeField] private WorkWithDB _workWithDB;
 
-    private void OnEnable()
-    {
+    private WorkWithDB _workWithDB;
+
+    private void OnEnable()=>
         _toggle.onValueChanged.AddListener(OnToggleClick);
-    }
 
-    private void OnDisable()
-    {
+    private void OnDisable()=>
         _toggle.onValueChanged.RemoveListener(OnToggleClick);
-    }
 
-    private void OnToggleClick(bool toggleState)
-    {
-        // SettingHolder.IsTranslateRevers = toggleState;
+    private void OnToggleClick(bool toggleState)=>
         _workWithDB.SetDirectionEnRuInTableUsers(toggleState);
-    }
 
     private void Start()
     {
-        // _toggle.isOn = SettingHolder.IsTranslateRevers;
+        _workWithDB = GameObject.Find("WorkWithDB").GetComponent<WorkWithDB>();
+
         _toggle.isOn = _workWithDB.ChekIfDirectionEnRuFromTableUsers();
     }
 }

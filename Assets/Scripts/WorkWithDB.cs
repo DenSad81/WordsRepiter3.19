@@ -13,7 +13,6 @@ using UnityEngine.SceneManagement;
 public class WorkWithDB : MonoBehaviour
 {
     private DB _db = new DB("mainDB.bytes");
-    private string _users = "Users";
 
     private void Start()
     {
@@ -77,10 +76,62 @@ public class WorkWithDB : MonoBehaviour
 
 
         if (SceneManager.GetActiveScene().name == "WordsScene")
-            MainProcces.FirstScan(this);
+            MainProcces.Start(/*this*/);
+
+        //GetDictionaryFromTableDictionaris(3).ShowData();
+        //SetStateActivInTableDictionaris(true,3);
+        //GetDictionaryFromTableDictionaris(3).ShowData();
+    }
+
+    public void RepackDataBase() =>
+        _db.RepackDataBase();
+
+
+
+    public int GetQuantityRowsFromTableDictionaris() =>
+             int.Parse(_db.ExecuteQueryWithAnswer($"SELECT COUNT(*) AS total_rows FROM Dictionaris;"));
+    public Dictionary GetDictionaryFromTableDictionaris(int id = 1)
+    {
+        if (id < 1)
+            id = 1;
+
+
+        DataTable table = _db.ExecuteQueryWithAnswerAsDataTable($"SELECT* FROM Dictionaris WHERE id={id};");
+        //table - содержит всего одну строку
+        //Debug.Log(table.Rows.Count);
+        //Debug.Log(table.Columns.Count);
+        if (table.Rows.Count != 1)
+            return null;
+
+        return new Dictionary(int.Parse(table.Rows[0][0].ToString()),
+                              int.Parse(table.Rows[0][1].ToString()),
+                                        table.Rows[0][2].ToString(),
+                                        table.Rows[0][3].ToString());
+    }
+    public bool ChekIfStateActivFromTableDictionaris(int id = 1)
+    {
+        string temp = _db.ExecuteQueryWithAnswer($"SELECT state FROM Dictionaris WHERE id={id};");
+
+        if (temp == "Activ")
+            return true;
+        else
+            return false;
+    }
+    public void SetStateActivInTableDictionaris(bool isActiv = true, int id = 1)
+    {
+        string tt;
+
+        if (isActiv == true)
+            tt = "Activ";
+        else
+            tt = "Passiv";
+
+        _db.ExecuteQueryWithoutAnswer($"UPDATE Dictionaris SET state ='{tt}' WHERE id={id};");
     }
 
 
+    public int GetQuantityRowsFromTableUsers() =>
+           int.Parse(_db.ExecuteQueryWithAnswer($"SELECT COUNT(*) AS total_rows FROM Users;"));
     public bool ChekIfModeAutoFromTableUsers(int id = 1)
     {
         string temp = _db.ExecuteQueryWithAnswer($"SELECT modeChange FROM Users WHERE id={id};");
@@ -90,7 +141,6 @@ public class WorkWithDB : MonoBehaviour
         else
             return false;
     }
-
     public void SetModeAutoInTableUsers(bool isAutoModeChange = true, int id = 1)
     {
         string tt;
@@ -102,7 +152,6 @@ public class WorkWithDB : MonoBehaviour
 
         _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET modeChange ='{tt}' WHERE id={id};");
     }
-
     public bool ChekIfDirectionEnRuFromTableUsers(int id = 1)
     {
         string temp = _db.ExecuteQueryWithAnswer($"SELECT direction FROM Users WHERE id={id};");
@@ -112,7 +161,6 @@ public class WorkWithDB : MonoBehaviour
         else
             return false;
     }
-
     public void SetDirectionEnRuInTableUsers(bool directionEnRu = true, int id = 1)
     {
         string tt;
@@ -124,21 +172,19 @@ public class WorkWithDB : MonoBehaviour
 
         _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET direction ='{tt}' WHERE id={id};");
     }
-
     public int GetQuantityRepitFromTableUsers(int id = 1)
     {
         string temp = _db.ExecuteQueryWithAnswer($"SELECT quantityRepit FROM Users WHERE id={id};");
         return int.Parse(temp);
     }
-
     public void SetQuantityRepitInTableUsers(int quantityRepit = 1, int id = 1)
     {
         _db.ExecuteQueryWithoutAnswer($"UPDATE Users SET quantityRepit ={quantityRepit} WHERE id={id};");
     }
 
 
-
-
+    public int GetQuantityRowsFromTableWords() =>
+              int.Parse(_db.ExecuteQueryWithAnswer($"SELECT COUNT(*) AS total_rows FROM Words;"));
     public void IncreaseCorrectAnswersInTableWords(int idWord)
     {
         string temp = _db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
@@ -146,7 +192,6 @@ public class WorkWithDB : MonoBehaviour
         t++;
         _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={t} WHERE id={idWord};");
     }
-
     public void DecreaseCorrectAnswersInTableWords(int idWord)
     {
         string temp = _db.ExecuteQueryWithAnswer($"SELECT correctAnswers FROM Words WHERE id={idWord};");
@@ -161,18 +206,15 @@ public class WorkWithDB : MonoBehaviour
 
         _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers = {value} WHERE id={idWord};");
     }
-
     public void SetCorrectAnswersInTableWords(int idWord, int quantityCorrectAnswers = 1)
     {
         _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers} WHERE id={idWord};");
     }
-
     public void SetAllCorrectAnswersInTableWords(int quantityCorrectAnswers = 1)
     {
         _db.ExecuteQueryWithoutAnswer($"UPDATE Words SET correctAnswers={quantityCorrectAnswers};");
     }
-
-    public List<Word> GetAllWordsFromDB()
+    public List<Word> GetAllWordsFromTableWords()
     {
         DataTable table = _db.ExecuteQueryWithAnswerAsDataTable("SELECT* FROM Words;");
         // Debug.Log(table.Rows.Count);
@@ -188,8 +230,7 @@ public class WorkWithDB : MonoBehaviour
                                int.Parse(table.Rows[i][5].ToString())));
         return words;
     }
-
-    public Word GetWordFromDB(int idWord = 1)
+    public Word GetWordFromTableWords(int idWord = 1)
     {
         if (idWord < 1)
             idWord = 1;
@@ -209,7 +250,6 @@ public class WorkWithDB : MonoBehaviour
                         int.Parse(table.Rows[0][4].ToString()),
                         int.Parse(table.Rows[0][5].ToString()));
     }
-
     public void AddWordWithIdToDB(Word word)//DANGER
     {
         if (_db.ExecuteQueryWithAnswer($"SELECT id FROM Words WHERE id={word.Id};") != null)
@@ -217,13 +257,11 @@ public class WorkWithDB : MonoBehaviour
 
         _db.ExecuteQueryWithoutAnswer($"INSERT INTO Words VALUES({word.Id}, '{word.WordEn}', '{word.Transcryption}', '{word.WordRu}', {word.Dict_id}, {word.CorrectAnswers});");
     }
-
     public void AddWordWithoutIdToDB(Word word)
     {
         _db.ExecuteQueryWithoutAnswer($"INSERT INTO Words (wordEn, transcryption, wordRu, dict_id, correctAnswers)" +
                    $"VALUES('{word.WordEn}', '{word.Transcryption}', '{word.WordRu}', {word.Dict_id}, {word.CorrectAnswers});");
     }
-
     public void DeleteWordIntoDB(int idWord)
     {
         _db.ExecuteQueryWithoutAnswer($"DELETE FROM Words WHERE id={idWord};");

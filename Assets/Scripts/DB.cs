@@ -12,7 +12,7 @@ public /*static*/ class DB
     private /*static*/ SqliteConnection _connection;
     private /*static*/ SqliteCommand _command;
 
-    /*static*/public DB(string fileName)
+    public DB(string fileName)
     {
         _fileName = fileName;
         _DBPath = GetDatabasePath();
@@ -24,22 +24,26 @@ public /*static*/ class DB
         string filePath;
 
 #if UNITY_EDITOR
-        filePath = Path.Combine(Application.streamingAssetsPath, _fileName);
-      // filePath = Path.Combine("C:/_projects/DB", fileName);
+        filePath = Path.Combine(Application.streamingAssetsPath, _fileName);// filePath = Path.Combine("C:/_projects/DB", fileName);
+
         return filePath;
 #endif
 
 #if UNITY_STANDALONE
         filePath = Path.Combine(Application.dataPath, _fileName);
+
         if (File.Exists(filePath) == false)
             UnpackDatabase(filePath);
+
         return filePath;
 #endif
 
 #if UNITY_ANDROID
-         filePath = Path.Combine(Application.persistentDataPath, _fileName);
-        if (File.Exists(filePath)==false) 
+        filePath = Path.Combine(Application.persistentDataPath, _fileName);
+
+        if (File.Exists(filePath) == false)
             UnpackDatabase(filePath);
+
         return filePath;
 #endif
     }
@@ -49,12 +53,20 @@ public /*static*/ class DB
     private /*static*/ void UnpackDatabase(string toPath)
     {
         string fromPath = Path.Combine(Application.streamingAssetsPath, _fileName);
-
         WWW reader = new WWW(fromPath);
+
         while (reader.isDone == false)
         { }
 
+        Debug.Log(toPath);
+        Debug.Log(_DBPath);
         File.WriteAllBytes(toPath, reader.bytes);
+    }
+
+    public void RepackDataBase()
+    {
+        File.Delete(_DBPath);
+        UnpackDatabase(_DBPath);
     }
 
     /// <summary> Этот метод открывает подключение к БД. </summary>

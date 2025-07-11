@@ -3,10 +3,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonRestart : MonoBehaviour
+public class ButtonResetDB : MonoBehaviour
 {
     private Button _button;
-
     private WorkWithDB _workWithDB;
 
     private void Awake() =>
@@ -19,9 +18,8 @@ public class ButtonRestart : MonoBehaviour
         _button.onClick.RemoveListener(OnButtonClick);
 
     private void OnButtonClick() =>
-        _workWithDB.SetAllCorrectAnswersInTableWords(_workWithDB.GetQuantityRepitFromTableUsers());
+        _workWithDB.RepackDataBase();
 
     private void Start() =>
         _workWithDB = GameObject.Find("WorkWithDB").GetComponent<WorkWithDB>();
-
 }

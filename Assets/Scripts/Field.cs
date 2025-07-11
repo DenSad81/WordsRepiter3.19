@@ -1,9 +1,11 @@
 //using System;
-//using System.Collections;
+using System.Collections;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Security.Principal;
 using TMPro;
+using UnityEditor;
+
 //using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,16 +13,14 @@ using UnityEngine.UI;
 
 public class Field : MonoBehaviour
 {
-    //[SerializeField] private MainProcces _mainProcces;
     [SerializeField] private int _fieldIndex;
     [SerializeField] private bool _isQuestionField;
     [SerializeField] private bool _isAnswerField;
     [SerializeField] private bool _isWordField;
     [SerializeField] private bool _isRightAnswerField;
     [SerializeField] private bool _isQuantityField;
-    [SerializeField] private WorkWithDB _workWithDB;
-    //[SerializeField] private EventsManager _eventsManager;
 
+    private WorkWithDB _workWithDB;
     private TMP_Text _text;
     private Button _button;
     private Image _image;
@@ -33,6 +33,8 @@ public class Field : MonoBehaviour
         _text = GetComponent<TMP_Text>();
         _button = GetComponent<Button>();
         _image = GetComponentInChildren<Image>();
+
+        _workWithDB = GameObject.Find("WorkWithDB").GetComponent<WorkWithDB>();
     }
 
     private void OnEnable()
@@ -74,38 +76,33 @@ public class Field : MonoBehaviour
 
     private void OnButtonClick()
     {
-        Debug.Log("rgtg");
-
-        if (_isAnswerField)//мен€ем цвет пол€ 
-        {
-            if (MainProcces.ChekIfAnswerIsRight(_fieldIndex))//угадали
-                _image.color = _colorSemiGreen;
-            else
-                _image.color = _colorSemiRed;
-        }
-
-
-
-        if (_isQuestionField)//запуск нового цикла
+        if (_isQuestionField)
         {
             if (_workWithDB.ChekIfModeAutoFromTableUsers() == false)//нужно упростить чтоб посто€нно в DB не лезть
+            {
+                MainProcces.CleanQuestionsPool();
                 MainProcces.ProccesBody();
+            }
         }
         else if (_isAnswerField)
         {
             if (MainProcces.ChekIfAnswerIsRight(_fieldIndex))//угадали
             {
+                _image.color = _colorSemiGreen;
                 EventsManager.EventDoPrintAddictionalField?.Invoke();
+                _workWithDB.DecreaseCorrectAnswersInTableWords(MainProcces.AnswersID[0]);             
 
-                //DoPrintAddictionalFields();
-
-                _workWithDB.DecreaseCorrectAnswersInTableWords(MainProcces.AnswersID[0]);
-
-                if (_workWithDB.ChekIfModeAutoFromTableUsers())
-                    MainProcces.ProccesBody();
+                if (_workWithDB.ChekIfModeAutoFromTableUsers() == true)
+                {
+                    //MainProcces.CleanQuestionsPool();
+                    // MainProcces.ProccesBody();
+                    //System.Threading.Thread.Sleep(5000); //millisec
+                    StartCoroutine(StartNewCycle());
+                }
             }
             else
             {
+                _image.color = _colorSemiRed;
                 _workWithDB.IncreaseCorrectAnswersInTableWords(MainProcces.AnswersID[0]);
             }
         }
@@ -118,15 +115,15 @@ public class Field : MonoBehaviour
     {
         if (_isQuestionField)
             if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordEn;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[0]).WordEn;
             else
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordRu;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[0]).WordRu;
 
         if (_isAnswerField)
             if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.AnswersID[_fieldIndex]).WordRu;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[_fieldIndex]).WordRu;
             else
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.AnswersID[_fieldIndex]).WordEn;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[_fieldIndex]).WordEn;
 
         if (_isQuantityField)
             _text.text = MainProcces.VolumeOfPoolIDs.ToString();
@@ -136,14 +133,22 @@ public class Field : MonoBehaviour
     {
         if (_isRightAnswerField)
             if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordRu;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[0]).WordRu;
             else
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordEn;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[0]).WordEn;
 
         if (_isWordField)
             if (_workWithDB.ChekIfDirectionEnRuFromTableUsers() == false)
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordEn;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[0]).WordEn;
             else
-                _text.text = _workWithDB.GetWordFromDB(MainProcces.WordIdInDB).WordRu;
+                _text.text = _workWithDB.GetWordFromTableWords(MainProcces.AnswersID[0]).WordRu;
+    }
+
+    private  IEnumerator StartNewCycle()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        MainProcces.CleanQuestionsPool();
+        MainProcces.ProccesBody();
     }
 }

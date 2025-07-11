@@ -1,7 +1,7 @@
 //using System;
 //using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+//using TMPro;
 
 //using System.Linq;
 //using System.Security.Principal;
@@ -10,28 +10,70 @@ using TMPro;
 //using Unity.Collections.LowLevel.Unsafe;
 //using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
+//using UnityEngine.Events;
 //using UnityEngine.UI;
 //using UnityEngine.SceneManagement;
 
 public static class MainProcces /*: MonoBehaviour*/
 {
     private static WorkWithDB _workWithDB;
-    private static Utils _utils = new Utils();
+    private static Utils _utils;
 
     private static List<int> _poolIDsQuestions = new List<int>();
-    private static List<int> _poolIDsAnswers = new List<int>();   
+    private static List<int> _poolIDsAnswers = new List<int>();
     public static int[] AnswersID = new int[9];
 
     public static int VolumeOfPoolIDs => _poolIDsQuestions.Count;
-    public static int WordIdInDB => AnswersID[0];// _wordIdInDB;
 
-    public static void FirstScan(object obj)
+    public static void Start()
     {
-        _workWithDB = (WorkWithDB)obj;
+        _workWithDB = GameObject.Find("WorkWithDB").GetComponent<WorkWithDB>();
+        _utils = GameObject.Find("Utils").GetComponent<Utils>();
 
-        FillingPools();
+        AdvancedFillingPools();
         ProccesBody();
+    }
+
+    private static void AdvancedFillingPools()
+    {
+        List<int> numberDictionary = new List<int>();
+
+        int l = 1;
+        while (true)
+        {
+            Dictionary tempDictionari = _workWithDB.GetDictionaryFromTableDictionaris(l);
+
+            if (tempDictionari == null)
+                break;//return;
+
+            if (tempDictionari.State == "Activ")
+                numberDictionary.Add(tempDictionari.DictId);
+
+            l++;
+        }
+
+        _poolIDsQuestions.Clear();
+        _poolIDsAnswers.Clear();
+
+        int k = 1;
+        while (true)
+        {
+            Word tempWord = _workWithDB.GetWordFromTableWords(k);
+
+            if (tempWord == null)
+                break;
+
+            if (tempWord.CorrectAnswers != 0)
+
+                foreach (var item in numberDictionary)
+                {
+                    if (tempWord.Dict_id == item)
+                        _poolIDsQuestions.Add(tempWord.Id);
+                }
+
+            _poolIDsAnswers.Add(tempWord.Id);
+            k++;
+        }
     }
 
     private static void FillingPools()
@@ -43,10 +85,10 @@ public static class MainProcces /*: MonoBehaviour*/
 
         while (true)
         {
-            Word tempWord = _workWithDB.GetWordFromDB(k);
+            Word tempWord = _workWithDB.GetWordFromTableWords(k);
 
             if (tempWord == null)
-                return;
+                break;// return;
 
             if (tempWord.CorrectAnswers != 0)
                 _poolIDsQuestions.Add(tempWord.Id);
@@ -58,9 +100,6 @@ public static class MainProcces /*: MonoBehaviour*/
 
     public static void ProccesBody()
     {
-        if (_workWithDB.GetWordFromDB(AnswersID[0]).CorrectAnswers <= 0)
-            _poolIDsQuestions.Remove(AnswersID[0]);
-
         EventsManager.EventDoResetColor?.Invoke();
         FillingFields();
         RandomisationFields();
@@ -92,5 +131,11 @@ public static class MainProcces /*: MonoBehaviour*/
     }
 
     public static bool ChekIfAnswerIsRight(int fieldIndex) =>
-         (AnswersID[fieldIndex] == WordIdInDB);//угадали;
+         (AnswersID[fieldIndex] == AnswersID[0]);//угадали;
+
+    public static void CleanQuestionsPool()
+    {
+        if (_workWithDB.GetWordFromTableWords(AnswersID[0]).CorrectAnswers <= 0)//не на своем месте
+            _poolIDsQuestions.Remove(AnswersID[0]);
+    }
 }

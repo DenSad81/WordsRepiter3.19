@@ -5,24 +5,18 @@ using TMPro;
 
 public class InputFieldQuantityRepit : MonoBehaviour
 {
-    [SerializeField] private WorkWithDB _workWithDB;
-
     private TMP_InputField _inputField;
 
-    private void Awake()
-    {
+    private WorkWithDB _workWithDB;
+
+    private void Awake()=>
         _inputField = GetComponent<TMP_InputField>();
-    }
 
-    private void OnEnable()
-    {
+    private void OnEnable()=>
         _inputField.onEndEdit.AddListener(OnEndInput);
-    }
 
-    private void OnDisable()
-    {
+    private void OnDisable()=>
         _inputField.onValueChanged.RemoveListener(OnEndInput);
-    }
 
     public void OnEndInput(string str)
     {
@@ -34,6 +28,8 @@ public class InputFieldQuantityRepit : MonoBehaviour
 
     private void Start()
     {
+        _workWithDB = GameObject.Find("WorkWithDB").GetComponent<WorkWithDB>();
+
         _inputField.text = _workWithDB.GetQuantityRepitFromTableUsers().ToString();
     }
 }

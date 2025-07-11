@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-class User
+public class User
 {
     public User(int id, string name, int amountToMem, int showTranscryption, int errorPenalty, string direction, int isActive, int currentDictId, int autoPronance, string modeChange, int quantityRepit)
     {
